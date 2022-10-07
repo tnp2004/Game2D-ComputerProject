@@ -33,7 +33,7 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 position = Vector2( 341, 214 )
 
 [node name="Owlet" parent="." instance=ExtResource( 2 )]
-position = Vector2( -64, -80 )
+position = Vector2( -87, -52 )
 scale = Vector2( 2, 2 )
 
 [node name="TileMap" type="TileMap" parent="."]
