@@ -38,7 +38,6 @@ func attack_combo(delta):
 	if time > 1:
 		attack_stage = 1
 		time = 0
-	print(time)
 
 func attack_and_run():
 	if Input.is_action_just_pressed("left_click"):
@@ -51,4 +50,7 @@ func _physics_process(_delta):
 	velocity.y += _delta * GRAVITY
 	velocity = move_and_slide(velocity, Vector2.UP)
 	current_state_label()
-	print(velocity)
+
+func _on_attackArea_area_entered(area):
+	if area.is_in_group("enemy"):
+		print("player attack")
