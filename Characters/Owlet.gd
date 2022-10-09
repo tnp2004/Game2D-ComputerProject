@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
+
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
@@ -17,11 +19,13 @@ func get_input_direction():
 		velocity.y = - JUMPFORCE
 	
 	if direction < 0:
-		$AnimatedSprite.flip_h = true
-	
+		$AnimatedSprite.flip_h = true # flip character
+		$attackArea.position.x = -42 # set position of attackArea
+		
 	if direction > 0:
-		$AnimatedSprite.flip_h = false
-
+		$AnimatedSprite.flip_h = false # flip character
+		$attackArea.position.x = 0 # set position of attackArea
+		
 # attack
 var attack_stage = 1
 var time = 0
@@ -50,7 +54,30 @@ func _physics_process(_delta):
 	velocity.y += _delta * GRAVITY
 	velocity = move_and_slide(velocity, Vector2.UP)
 	current_state_label()
+	random_thing_in_array(normal_attack)
+
+# damage indicator
+func spawn_effect(EFFECT, effect_position = global_position):
+	if EFFECT:
+		var effect = EFFECT.instance()
+		get_tree().current_scene.add_child(effect)
+		effect.global_position = effect_position
+		return effect
+
+func spawn_damageIndicator(damage):
+	var indicator = spawn_effect(INDICATOR_DAMAGE)
+	if indicator:
+		indicator.label.text = str(damage)
 
 func _on_attackArea_area_entered(area):
 	if area.is_in_group("enemy"):
-		print("player attack")
+		area.get_owner().i_get_attack(random_thing_in_array(normal_attack))
+		#spawn_damageIndicator(1) <- player get damage
+
+func random_thing_in_array(arr):
+	var randomResult = randi()%len(arr)
+	return normal_attack[randomResult]
+
+var normal_attack = [2, 3, 4, 5] # is critical
+func do_damage():
+	pass

@@ -36,7 +36,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("attackArea/attackCollision:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -76,7 +76,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("attackArea/attackCollision:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -116,7 +116,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("attackArea/attackCollision:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -156,7 +156,7 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("attackArea/attackCollision:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -434,7 +434,7 @@ text = "state"
 
 [node name="attackArea" type="Area2D" parent="." groups=["player_attack"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea"]
+[node name="attackCollision" type="CollisionShape2D" parent="attackArea"]
 position = Vector2( 19.5, 3 )
 shape = SubResource( 42 )
 disabled = true
