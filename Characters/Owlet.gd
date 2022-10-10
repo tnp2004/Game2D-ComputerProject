@@ -4,7 +4,6 @@ const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
 const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
-const TRANSFORM = preload("res://Skills/Owlet/Transform.tscn") #skill 3
 
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
@@ -91,7 +90,7 @@ func most_of_arr(arr):
 
 var normal_attack = [2, 3, 4, 5]
 func do_damage(area, damage_arr):
-	area.get_owner().i_get_attack(random_thing_in_array(damage_arr) + buff_damage, most_of_arr(damage_arr))
+	area.get_owner().i_get_attack(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
 func useDash_skill():
 	if Input.is_action_just_pressed("skill_1"):
