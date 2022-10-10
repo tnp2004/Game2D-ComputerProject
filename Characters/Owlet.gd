@@ -4,6 +4,7 @@ const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
 const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
+const TRANSFORM = preload("res://Skills/Owlet/Transform.tscn") #skill 3
 
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
@@ -14,20 +15,7 @@ onready var FSM = get_node("Owlet_FSM")
 var FRICTION = 0.5
 var velocity = Vector2.ZERO
 
-func dash_skill():
-	var skill_1 = DASH_SKILL.instance()
-	var smoke = DASH_SMOKE.instance()
-	skill_1.effect(position, $AnimatedSprite.flip_h)
-	smoke.dash_smoke_effect(position, $AnimatedSprite.flip_h)
-	print(position)
-	position.x += 220 * -1 if $AnimatedSprite.flip_h else 220 * 1
-	get_tree().current_scene.add_child(skill_1)
-	get_tree().current_scene.add_child(smoke)
-
-func wind_cutter_skill():
-	var skill_2 = WIND_CUTTER.instance()
-	skill_2.wind_cutter(position, $AnimatedSprite.flip_h)
-	get_tree().current_scene.add_child(skill_2)
+var buff_damage = 0
 
 func get_input_direction():
 	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -103,14 +91,47 @@ func most_of_arr(arr):
 
 var normal_attack = [2, 3, 4, 5]
 func do_damage(area, damage_arr):
-	area.get_owner().i_get_attack(random_thing_in_array(damage_arr), most_of_arr(damage_arr))
+	area.get_owner().i_get_attack(random_thing_in_array(damage_arr) + buff_damage, most_of_arr(damage_arr))
 
 func useDash_skill():
 	if Input.is_action_just_pressed("skill_1"):
 		FSM.set_state(FSM.states.skill_1)
 		dash_skill()
 
+func dash_skill():
+	var skill_1 = DASH_SKILL.instance()
+	var smoke = DASH_SMOKE.instance()
+	skill_1.effect(position, $AnimatedSprite.flip_h)
+	smoke.dash_smoke_effect(position, $AnimatedSprite.flip_h)
+	position.x += 220 * -1 if $AnimatedSprite.flip_h else 220 * 1
+	get_tree().current_scene.add_child(skill_1)
+	get_tree().current_scene.add_child(smoke)
+
 func useWindCutter_skill():
 	if Input.is_action_just_pressed("skill_2"):
 		FSM.set_state(FSM.states.skill_2)
 		wind_cutter_skill()
+		
+func wind_cutter_skill():
+	var skill_2 = WIND_CUTTER.instance()
+	skill_2.wind_cutter(position, $AnimatedSprite.flip_h)
+	get_tree().current_scene.add_child(skill_2)
+
+func useTransform_skill():
+	if Input.is_action_just_pressed("skill_3"):
+		FSM.set_state(FSM.states.skill_3)
+		transform_skill()
+
+func transform_skill():
+	buff_damage += 1000
+	$TransformTimer.start()
+	$TransformSprite.visible = true
+	$TransformPlayer.play("skill_3")
+	
+func stop_transform_skill():
+	buff_damage -= 1000
+	$TransformSprite.visible = false
+	$TransformPlayer.stop()
+
+func _on_TransformTimer_timeout():
+	stop_transform_skill()

@@ -3,7 +3,6 @@ extends KinematicBody2D
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 
 func i_get_attack(damage, most_damage):
-	print("ahhh!")
 	spawn_damageIndicator(damage, most_damage)
 
 func _on_Area2D_body_entered(body):

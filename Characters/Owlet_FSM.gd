@@ -9,6 +9,7 @@ func _init():
 	_add_state("attack_run")
 	_add_state("skill_1")
 	_add_state("skill_2")
+	_add_state("skill_3")
 
 func _ready():
 	set_state(states.idle)
@@ -17,6 +18,7 @@ func _state_logic(_delta: float) -> void:
 	parent.get_input_direction()
 	parent.useDash_skill()
 	parent.useWindCutter_skill()
+	parent.useTransform_skill()
 	if parent.velocity.length() == 0:
 		parent.attack_combo(_delta)
 	else:
@@ -58,6 +60,9 @@ func _get_transition() -> int:
 		states.skill_2:
 			if !animation_player.is_playing():
 				return states.idle
+		states.skill_3:
+			if !animation_player.is_playing():
+				return states.idle
 		
 	return - 1
 
@@ -80,3 +85,5 @@ func _enter_state(_previous_state: int, _new_state: int) -> void:
 			animation_player.play("skill_1")
 		states.skill_2:
 			animation_player.play("skill_2")
+		states.skill_3:
+			animation_player.play("skill_3")
