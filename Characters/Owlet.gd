@@ -1,6 +1,9 @@
 extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
+const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
+const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
+const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
 
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
@@ -10,6 +13,21 @@ onready var FSM = get_node("Owlet_FSM")
 
 var FRICTION = 0.5
 var velocity = Vector2.ZERO
+
+func dash_skill():
+	var skill_1 = DASH_SKILL.instance()
+	var smoke = DASH_SMOKE.instance()
+	skill_1.effect(position, $AnimatedSprite.flip_h)
+	smoke.dash_smoke_effect(position, $AnimatedSprite.flip_h)
+	print(position)
+	position.x += 220 * -1 if $AnimatedSprite.flip_h else 220 * 1
+	get_tree().current_scene.add_child(skill_1)
+	get_tree().current_scene.add_child(smoke)
+
+func wind_cutter_skill():
+	var skill_2 = WIND_CUTTER.instance()
+	skill_2.wind_cutter(position, $AnimatedSprite.flip_h)
+	get_tree().current_scene.add_child(skill_2)
 
 func get_input_direction():
 	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -54,7 +72,6 @@ func _physics_process(_delta):
 	velocity.y += _delta * GRAVITY
 	velocity = move_and_slide(velocity, Vector2.UP)
 	current_state_label()
-	random_thing_in_array(normal_attack)
 
 # damage indicator
 func spawn_effect(EFFECT, effect_position = global_position):
@@ -71,13 +88,29 @@ func spawn_damageIndicator(damage):
 
 func _on_attackArea_area_entered(area):
 	if area.is_in_group("enemy"):
-		area.get_owner().i_get_attack(random_thing_in_array(normal_attack))
-		#spawn_damageIndicator(1) <- player get damage
+		do_damage(area, normal_attack)
 
 func random_thing_in_array(arr):
 	var randomResult = randi()%len(arr)
-	return normal_attack[randomResult]
+	return arr[randomResult]
 
-var normal_attack = [2, 3, 4, 5] # is critical
-func do_damage():
-	pass
+func most_of_arr(arr):
+	var most_number = 0
+	for i in arr:
+		if i > most_number:
+			most_number = i
+	return most_number
+
+var normal_attack = [2, 3, 4, 5]
+func do_damage(area, damage_arr):
+	area.get_owner().i_get_attack(random_thing_in_array(damage_arr), most_of_arr(damage_arr))
+
+func useDash_skill():
+	if Input.is_action_just_pressed("skill_1"):
+		FSM.set_state(FSM.states.skill_1)
+		dash_skill()
+
+func useWindCutter_skill():
+	if Input.is_action_just_pressed("skill_2"):
+		FSM.set_state(FSM.states.skill_2)
+		wind_cutter_skill()
