@@ -20,7 +20,12 @@ func _physics_process(delta):
 	velocity.x = SPEED * delta * (-1 if player_is_flip else 1) 
 	translate(velocity)
 
+func get_player_node():
+	for i in range(len(get_tree().current_scene.get_children())):
+		var child = get_tree().current_scene.get_children()[i]
+		if child.is_in_group("player"):
+			return i # index of player node
 
 func _on_SkillArea_area_entered(area):
 	if area.is_in_group("enemy"):
-		get_tree().current_scene.get_child(0).do_damage(area, damage_wind_cutter_skill)
+		get_tree().current_scene.get_child(get_player_node()).do_damage(area, damage_wind_cutter_skill)
