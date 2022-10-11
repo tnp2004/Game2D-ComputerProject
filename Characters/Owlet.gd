@@ -62,7 +62,6 @@ func _physics_process(_delta):
 	velocity.y += _delta * GRAVITY
 	velocity = move_and_slide(velocity, Vector2.UP)
 	current_state_label()
-	print(velocity.length())
 
 # damage indicator
 func spawn_effect(EFFECT, effect_position = global_position):

@@ -2,6 +2,12 @@ extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 
+var SPEED = 200
+var JUMPFORCE = 100
+const FRICTION = 0.5
+const GRAVITY = 1000
+var velocity = Vector2.ZERO
+
 func i_get_attack(damage, most_damage, buff_damage):
 	spawn_damageIndicator(damage, most_damage, buff_damage)
 
@@ -22,11 +28,7 @@ func spawn_damageIndicator(damage, most_damage, buff_damage):
 		indicator.label.text = str(damage + buff_damage)
 
 # chase player
-var SPEED = 200
-const FRICTION = 0.5
-const GRAVITY = 1000
 var isChase = false
-var velocity = Vector2.ZERO
 
 func get_player_node():
 	for i in get_tree().current_scene.get_children():
@@ -34,19 +36,12 @@ func get_player_node():
 			return i # player node
 
 func chase_player():
-	if isChase:
-		var to_player = (get_player_node().position - position).normalized()
-		velocity.x = to_player.x * SPEED * FRICTION
-		velocity = move_and_slide(velocity, Vector2.UP)
-	else:
-		velocity = Vector2.ZERO
-	
+	var to_player = (get_player_node().position - position).normalized()
+	velocity.x = to_player.x * SPEED * FRICTION
+	velocity = move_and_slide(velocity, Vector2.UP)
+
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
-	if velocity.x < 0:
-		$AnimatedSprite.flip_h = true
-	elif velocity.x > 0:
-		$AnimatedSprite.flip_h = false
 		
 func _on_Detectplayer_body_entered(body):
 	if body.is_in_group("player"):

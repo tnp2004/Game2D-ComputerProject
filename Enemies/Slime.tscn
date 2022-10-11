@@ -1,7 +1,7 @@
 [gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Enemies-Sprite/Slime/Slime_Spiked_Idle.png" type="Texture" id=1]
-[ext_resource path="res://Enemies/Enemy.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Slime.gd" type="Script" id=2]
 [ext_resource path="res://Enemies-Sprite/Slime/Slime_Spiked_Run.png" type="Texture" id=3]
 [ext_resource path="res://Enemies-Sprite/Slime/Slime_Spiked_Death.png" type="Texture" id=4]
 [ext_resource path="res://Enemies-Sprite/Slime/Slime_Spiked_Hit.png" type="Texture" id=5]
@@ -364,6 +364,11 @@ shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectplayer"]
 shape = SubResource( 3 )
+
+[node name="Grounddetecter" type="RayCast2D" parent="."]
+position = Vector2( 43, 0 )
+enabled = true
+cast_to = Vector2( 0, 40 )
 
 [connection signal="body_entered" from="Detectplayer" to="." method="_on_Detectplayer_body_entered"]
 [connection signal="body_exited" from="Detectplayer" to="." method="_on_Detectplayer_body_exited"]
