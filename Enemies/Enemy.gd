@@ -34,16 +34,20 @@ func get_player_node():
 			return i # player node
 
 func chase_player():
-	var to_player = (get_player_node().position - position).normalized()
-	velocity.x = to_player.x * SPEED * FRICTION
-	velocity = move_and_slide(velocity, Vector2.UP)
+	if isChase:
+		var to_player = (get_player_node().position - position).normalized()
+		velocity.x = to_player.x * SPEED * FRICTION
+		velocity = move_and_slide(velocity, Vector2.UP)
+	else:
+		velocity = Vector2.ZERO
 	
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
-	if isChase:
-		chase_player()
-	else:
-		velocity = Vector2.ZERO
+	if velocity.x < 0:
+		$AnimatedSprite.flip_h = true
+	elif velocity.x > 0:
+		$AnimatedSprite.flip_h = false
+		
 func _on_Detectplayer_body_entered(body):
 	if body.is_in_group("player"):
 		isChase = true
