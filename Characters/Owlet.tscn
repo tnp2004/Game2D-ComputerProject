@@ -899,5 +899,5 @@ anims/skill_3 = SubResource( 105 )
 wait_time = 20.0
 one_shot = true
 
-[connection signal="area_entered" from="attackArea" to="." method="_on_attackArea_area_entered"]
+[connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]

@@ -163,4 +163,4 @@ position = Vector2( 25, 0 )
 position = Vector2( 197.5, 24.5 )
 shape = SubResource( 13 )
 
-[connection signal="area_entered" from="SkillArea" to="." method="_on_SkillArea_area_entered"]
+[connection signal="body_entered" from="SkillArea" to="." method="_on_SkillArea_body_entered"]

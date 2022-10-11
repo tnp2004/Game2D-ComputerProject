@@ -14,6 +14,9 @@ onready var FSM = get_node("Owlet_FSM")
 var FRICTION = 0.5
 var velocity = Vector2.ZERO
 
+var normal_color = Color(1, 1, 1)
+var transform_color = Color(1, 0.5, 0)
+var effect_color = normal_color
 var buff_damage = 0
 
 func get_input_direction():
@@ -73,9 +76,9 @@ func spawn_damageIndicator(damage):
 	if indicator:
 		indicator.label.text = str(damage)
 
-func _on_attackArea_area_entered(area):
-	if area.is_in_group("enemy"):
-		do_damage(area, normal_attack)
+func _on_attackArea_body_entered(body):
+	if body.is_in_group("enemy"):
+		do_damage(body, normal_attack)
 
 func random_thing_in_array(arr):
 	var randomResult = randi()%len(arr)
@@ -89,8 +92,8 @@ func most_of_arr(arr):
 	return most_number
 
 var normal_attack = [2, 3, 4, 5]
-func do_damage(area, damage_arr):
-	area.get_owner().i_get_attack(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
+func do_damage(body, damage_arr):
+	body.i_get_attack(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
 func useDash_skill():
 	if Input.is_action_just_pressed("skill_1"):
@@ -100,8 +103,8 @@ func useDash_skill():
 func dash_skill():
 	var skill_1 = DASH_SKILL.instance()
 	var smoke = DASH_SMOKE.instance()
-	skill_1.effect(position, $AnimatedSprite.flip_h)
-	smoke.dash_smoke_effect(position, $AnimatedSprite.flip_h)
+	skill_1.effect(position, $AnimatedSprite.flip_h, effect_color)
+	smoke.dash_smoke_effect(position, $AnimatedSprite.flip_h, effect_color)
 	position.x += 220 * -1 if $AnimatedSprite.flip_h else 220 * 1
 	get_tree().current_scene.add_child(skill_1)
 	get_tree().current_scene.add_child(smoke)
@@ -113,7 +116,7 @@ func useWindCutter_skill():
 		
 func wind_cutter_skill():
 	var skill_2 = WIND_CUTTER.instance()
-	skill_2.wind_cutter(position, $AnimatedSprite.flip_h)
+	skill_2.wind_cutter(position, $AnimatedSprite.flip_h, effect_color)
 	get_tree().current_scene.add_child(skill_2)
 
 func useTransform_skill():
@@ -123,12 +126,14 @@ func useTransform_skill():
 
 func transform_skill():
 	buff_damage += 1000
+	effect_color = transform_color
 	$TransformTimer.start()
 	$TransformSprite.visible = true
 	$TransformPlayer.play("skill_3")
 	
 func stop_transform_skill():
 	buff_damage -= 1000
+	effect_color = normal_color
 	$TransformSprite.visible = false
 	$TransformPlayer.stop()
 
