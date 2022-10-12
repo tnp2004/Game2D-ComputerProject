@@ -366,9 +366,17 @@ shape = SubResource( 2 )
 shape = SubResource( 3 )
 
 [node name="Grounddetecter" type="RayCast2D" parent="."]
-position = Vector2( 43, 0 )
+position = Vector2( 36, 0 )
 enabled = true
 cast_to = Vector2( 0, 40 )
 
+[node name="Walldetecter" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 50, 0 )
+
+[node name="turn_around_timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="Detectplayer" to="." method="_on_Detectplayer_body_entered"]
 [connection signal="body_exited" from="Detectplayer" to="." method="_on_Detectplayer_body_exited"]
+[connection signal="timeout" from="turn_around_timer" to="." method="_on_turn_around_timer_timeout"]

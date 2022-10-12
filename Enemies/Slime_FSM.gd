@@ -11,7 +11,9 @@ func _ready():
 	set_state(states.run)
 
 func _state_logic(_delta: float) -> void:
-	parent.chase_player()
+	if parent.isChase:
+		parent.chase_player()
+	parent.turn_around()
 
 func _get_transition() -> int:
 	match state:

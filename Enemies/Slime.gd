@@ -27,13 +27,25 @@ func spawn_damageIndicator(damage, most_damage, buff_damage):
 			
 		indicator.label.text = str(damage + buff_damage)
 
-# chase player
+# enemy intelligent
 var isChase = false
+var direction = 1
+var is_turn_around_cooldown = false
 
 func get_player_node():
 	for i in get_tree().current_scene.get_children():
 		if i.is_in_group("player"):
 			return i # player node
+
+func isFlip():
+	if velocity.x < 0:
+		$AnimatedSprite.flip_h = true
+		$Grounddetecter.position.x = - 36
+		$Walldetecter.cast_to.x = - 50
+	elif velocity.x > 0:
+		$AnimatedSprite.flip_h = false
+		$Grounddetecter.position.x = 36
+		$Walldetecter.cast_to.x = 50
 
 func chase_player():
 	var to_player = (get_player_node().position - position).normalized()
@@ -42,7 +54,21 @@ func chase_player():
 
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
-		
+	walk_around()
+	isFlip()
+	
+func walk_around():
+	if !isChase:
+		velocity.x = SPEED * FRICTION * direction
+		velocity = move_and_slide(velocity, Vector2.UP)
+
+func turn_around():
+	if $Walldetecter.is_colliding() and !is_turn_around_cooldown or !$Grounddetecter.is_colliding() and !is_turn_around_cooldown:
+		is_turn_around_cooldown = true
+		$turn_around_timer.start()
+		isChase = false
+		direction = -direction
+
 func _on_Detectplayer_body_entered(body):
 	if body.is_in_group("player"):
 		isChase = true
@@ -50,3 +76,6 @@ func _on_Detectplayer_body_entered(body):
 func _on_Detectplayer_body_exited(body):
 	if body.is_in_group("player"):
 		isChase = false
+
+func _on_turn_around_timer_timeout():
+	is_turn_around_cooldown = false
