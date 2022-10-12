@@ -1,15 +1,28 @@
 extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
+onready var FSM = get_node("Slime_FSM")
+
+export(int) var max_health = 20
+var health = max_health
+var isDead = false
 
 var SPEED = 200
 var JUMPFORCE = 100
 const FRICTION = 0.5
 const GRAVITY = 1000
 var velocity = Vector2.ZERO
+var attack_damage = [2, 3, 4]
 
-func i_get_attack(damage, most_damage, buff_damage):
-	spawn_damageIndicator(damage, most_damage, buff_damage)
+# Health
+func dead():
+	isDead = true
+	FSM.set_state(FSM.states.dead)
+
+func decrease_health(damage):
+	health -= damage
+	if health <= 0:
+		dead()
 
 # damage indicator
 func spawn_effect(EFFECT, effect_position = global_position):
@@ -19,13 +32,14 @@ func spawn_effect(EFFECT, effect_position = global_position):
 		effect.global_position = effect_position
 		return effect
 
-func spawn_damageIndicator(damage, most_damage, buff_damage):
+func spawn_damageIndicator_enemy(damage, most_damage, buff_damage):
 	var indicator = spawn_effect(INDICATOR_DAMAGE)
+	var total_damage = damage + buff_damage
+	decrease_health(total_damage)
 	if indicator:
 		if damage == most_damage:
 			indicator.label.add_color_override("font_color", Color(1, 0, 0))
-			
-		indicator.label.text = str(damage + buff_damage)
+		indicator.label.text = str(total_damage)
 
 # enemy intelligent
 var isChase = false
@@ -36,6 +50,19 @@ func get_player_node():
 	for i in get_tree().current_scene.get_children():
 		if i.is_in_group("player"):
 			return i # player node
+
+# attacking
+func random_thing_in_array(arr):
+	var randomResult = randi()%len(arr)
+	return arr[randomResult]
+
+func attacking(body):
+	body.decrease_health(random_thing_in_array(attack_damage))
+
+func _on_AttackArea_body_entered(body):
+	if body.is_in_group("player"):
+		if !body.isDead:
+			attacking(body)
 
 func isFlip():
 	if velocity.x < 0:
@@ -54,8 +81,6 @@ func chase_player():
 
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta
-	walk_around()
-	isFlip()
 	
 func walk_around():
 	if !isChase:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://Enemies-Sprite/Slime/Slime_Spiked_Idle.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Slime.gd" type="Script" id=2]
@@ -188,6 +188,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=31]
 resource_name = "attack"
@@ -216,10 +228,21 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
 
 [sub_resource type="Animation" id=29]
 resource_name = "dead"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -243,6 +266,20 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
 }
 
 [sub_resource type="Animation" id=30]
@@ -336,7 +373,12 @@ extents = Vector2( 28.5, 28.5 )
 [sub_resource type="CircleShape2D" id=3]
 radius = 253.284
 
+[sub_resource type="RectangleShape2D" id=41]
+extents = Vector2( 38, 40.5 )
+
 [node name="Slime" type="KinematicBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="Slime_FSM" type="Node" parent="."]
@@ -365,6 +407,12 @@ shape = SubResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detectplayer"]
 shape = SubResource( 3 )
 
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2( 0, -2 )
+shape = SubResource( 41 )
+
 [node name="Grounddetecter" type="RayCast2D" parent="."]
 position = Vector2( 36, 0 )
 enabled = true
@@ -379,4 +427,5 @@ one_shot = true
 
 [connection signal="body_entered" from="Detectplayer" to="." method="_on_Detectplayer_body_entered"]
 [connection signal="body_exited" from="Detectplayer" to="." method="_on_Detectplayer_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
 [connection signal="timeout" from="turn_around_timer" to="." method="_on_turn_around_timer_timeout"]

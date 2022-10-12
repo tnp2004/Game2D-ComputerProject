@@ -5,6 +5,9 @@ const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
 const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
 
+export(int) var max_health = 20
+var health = max_health
+var isDead = false
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
@@ -33,7 +36,18 @@ func get_input_direction():
 	if direction > 0:
 		$AnimatedSprite.flip_h = false # flip character
 		$attackArea.position.x = 0 # set position of attackArea
-		
+
+# health
+func dead():
+	isDead = true
+	FSM.set_state(FSM.states.dead)
+
+func decrease_health(damage):
+	health -= damage
+	if health <= 0:
+		print("dead")
+		dead()
+
 # attack
 var attack_stage = 1
 var time = 0
@@ -54,6 +68,9 @@ func attack_combo(delta):
 func attack_and_run():
 	if Input.is_action_just_pressed("left_click"):
 		FSM.set_state(FSM.states.attack_run)
+
+func get_hurt():
+	pass
 
 func current_state_label():
 	$currentState.text = $AnimationPlayer.current_animation
@@ -93,7 +110,7 @@ func most_of_arr(arr):
 
 var normal_attack = [2, 3, 4, 5]
 func do_damage(body, damage_arr):
-	body.i_get_attack(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
+	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
 func useDash_skill():
 	if Input.is_action_just_pressed("skill_1"):

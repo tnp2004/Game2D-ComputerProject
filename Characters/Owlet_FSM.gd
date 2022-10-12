@@ -4,6 +4,7 @@ func _init():
 	_add_state("idle")
 	_add_state("run")
 	_add_state("jump")
+	_add_state("dead")
 	_add_state("attack_1")
 	_add_state("attack_2")
 	_add_state("attack_run")
@@ -15,14 +16,15 @@ func _ready():
 	set_state(states.idle)
 
 func _state_logic(_delta: float) -> void:
-	parent.get_input_direction()
-	parent.useDash_skill()
-	parent.useWindCutter_skill()
-	parent.useTransform_skill()
-	if parent.velocity.length() == 0:
-		parent.attack_combo(_delta)
-	else:
-		parent.attack_and_run()
+	if !parent.isDead:
+		parent.get_input_direction()
+		parent.useDash_skill()
+		parent.useWindCutter_skill()
+		parent.useTransform_skill()
+		if parent.velocity.length() == 0:
+			parent.attack_combo(_delta)
+		else:
+			parent.attack_and_run()
 
 func _get_transition() -> int:
 	match state:
@@ -75,6 +77,8 @@ func _enter_state(_previous_state: int, _new_state: int) -> void:
 			animation_player.play("run")
 		states.jump:
 			animation_player.play("jump")
+		states.dead:
+			animation_player.play("dead")
 		states.attack_1:
 			animation_player.play("attack_1")
 		states.attack_2:
