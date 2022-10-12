@@ -44,6 +44,7 @@ func dead():
 
 func decrease_health(damage):
 	health -= damage
+	spawn_damageIndicator(damage)
 	if health <= 0:
 		print("dead")
 		dead()
@@ -68,9 +69,6 @@ func attack_combo(delta):
 func attack_and_run():
 	if Input.is_action_just_pressed("left_click"):
 		FSM.set_state(FSM.states.attack_run)
-
-func get_hurt():
-	pass
 
 func current_state_label():
 	$currentState.text = $AnimationPlayer.current_animation
