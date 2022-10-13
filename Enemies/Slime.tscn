@@ -465,7 +465,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 28.5, 28.5 )
+extents = Vector2( 28.5, 21.5 )
 
 [sub_resource type="CircleShape2D" id=3]
 radius = 253.284
@@ -516,7 +516,7 @@ anims/jump = SubResource( 40 )
 anims/run = SubResource( 28 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -0.5 )
+position = Vector2( 0.5, 6.5 )
 shape = SubResource( 2 )
 
 [node name="Detectplayer" type="Area2D" parent="."]

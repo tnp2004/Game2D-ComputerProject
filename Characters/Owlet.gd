@@ -4,6 +4,7 @@ const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
 const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
+const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
 export(int) var max_health = 20
 var health = max_health
@@ -37,6 +38,11 @@ func get_input_direction():
 		$AnimatedSprite.flip_h = false # flip character
 		$attackArea.position.x = 0 # set position of attackArea
 
+func screen_shaker():
+	var shake = SCREEN_SHAKER.instance()
+	$Camera2D.add_child(shake)
+	shake.start()
+
 # health
 func dead():
 	isDead = true
@@ -45,10 +51,12 @@ func dead():
 func decrease_health(damage):
 	health -= damage
 	spawn_damageIndicator(damage)
+	screen_shaker()
+	FSM.set_state(FSM.states.hurt)
 	if health <= 0:
 		print("dead")
 		dead()
-
+		
 # attack
 var attack_stage = 1
 var time = 0
