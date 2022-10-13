@@ -47,6 +47,10 @@ var isChase = false
 var direction = 1
 var is_turn_around_cooldown = false
 
+func hide_attack_effect():
+	if $AnimationPlayer.current_animation != "attack":
+		$effect.visible = false
+
 func get_player_node():
 	for i in get_tree().current_scene.get_children():
 		if i.is_in_group("player"):

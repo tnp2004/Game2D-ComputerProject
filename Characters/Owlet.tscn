@@ -965,6 +965,8 @@ shape = SubResource( 15 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+smoothing_enabled = true
+smoothing_speed = 25.0
 
 [node name="currentState" type="Label" parent="."]
 margin_left = -18.0

@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/Crab_Hit.png-1f0dab6764047bb0ec49ff89a6899dac.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://Enemies-Sprite/Crab/Crab_Hit.png"
+dest_files=[ "res://.import/Crab_Hit.png-1f0dab6764047bb0ec49ff89a6899dac.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

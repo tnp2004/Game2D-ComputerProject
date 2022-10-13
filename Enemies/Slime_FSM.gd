@@ -16,6 +16,7 @@ func _state_logic(_delta: float) -> void:
 		parent.turn_around()
 		parent.walk_around()
 		parent.isFlip()
+		parent.hide_attack_effect()
 
 func _get_transition() -> int:
 	match state:
