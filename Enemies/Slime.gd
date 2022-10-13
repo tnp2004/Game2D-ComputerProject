@@ -21,6 +21,7 @@ func dead():
 
 func decrease_health(damage):
 	health -= damage
+	FSM.set_state(FSM.states.hurt)
 	if health <= 0:
 		dead()
 

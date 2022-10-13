@@ -1,6 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/DamageIndicator.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=3]
+size = 9
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -78,6 +87,7 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 14.0
 grow_horizontal = 2
+custom_fonts/font = SubResource( 3 )
 text = "0"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
