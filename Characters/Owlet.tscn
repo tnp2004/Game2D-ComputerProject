@@ -1026,6 +1026,8 @@ margin_bottom = -7.0
 rect_scale = Vector2( 0.8, 0.8 )
 custom_fonts/font = SubResource( 121 )
 text = "state"
+align = 1
+valign = 1
 
 [node name="attackArea" type="Area2D" parent="." groups=["player_attack"]]
 

@@ -62,12 +62,13 @@ func random_thing_in_array(arr):
 	return arr[randomResult]
 
 func attacking(body):
-	body.decrease_health(random_thing_in_array(attack_damage))
+	body.decrease_health(random_thing_in_array(attack_damage), $AnimatedSprite.flip_h)
 
 func _on_AttackArea_body_entered(body):
 	if body.is_in_group("player"):
 		if !body.isDead:
 			attacking(body)
+	print(body)
 
 func isFlip():
 	if velocity.x < 0:
@@ -109,3 +110,6 @@ func _on_Detectplayer_body_exited(body):
 
 func _on_turn_around_timer_timeout():
 	is_turn_around_cooldown = false
+
+func _on_AttackArea_body_exited(body):
+	print("exit",body)

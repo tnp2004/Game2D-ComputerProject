@@ -6,7 +6,7 @@ const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
-export(int) var max_health = 20
+export(int) var max_health = 200
 var health = max_health
 var isDead = false
 export(int) var WALKSPEED = 300
@@ -38,6 +38,14 @@ func get_input_direction():
 		$AnimatedSprite.flip_h = false # flip character
 		$attackArea.position.x = 0 # set position of attackArea
 
+var knockback_force = 3000
+var knockup_force = - 400
+func knockback(enemy_is_flip):
+	var direction = - 1 if enemy_is_flip else 1
+	velocity.x = lerp(velocity.x, knockback_force, 0.5) * direction
+	velocity.y = lerp(0, knockup_force, 0.6)
+	velocity = move_and_slide(velocity, Vector2.UP)
+
 func screen_shaker():
 	var shake = SCREEN_SHAKER.instance()
 	$Camera2D.add_child(shake)
@@ -48,10 +56,11 @@ func dead():
 	isDead = true
 	FSM.set_state(FSM.states.dead)
 
-func decrease_health(damage):
+func decrease_health(damage, enemy_direction):
 	health -= damage
 	spawn_damageIndicator(damage)
 	screen_shaker()
+	knockback(enemy_direction)
 	FSM.set_state(FSM.states.hurt)
 	if health <= 0:
 		print("dead")

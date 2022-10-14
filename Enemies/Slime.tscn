@@ -241,6 +241,7 @@ tracks/5/keys = {
 [sub_resource type="Animation" id=31]
 resource_name = "attack"
 length = 0.4
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -266,48 +267,36 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("effect:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("effect:animation")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ "effect" ]
 }
-tracks/4/type = "value"
-tracks/4/path = NodePath("effect:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/path = NodePath("effect:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
 "times": PoolRealArray( 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
 }
-tracks/5/type = "value"
-tracks/5/path = NodePath("effect:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/path = NodePath("effect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
@@ -471,7 +460,7 @@ extents = Vector2( 28.5, 21.5 )
 radius = 253.284
 
 [sub_resource type="RectangleShape2D" id=41]
-extents = Vector2( 38, 40.5 )
+extents = Vector2( 38, 30.75 )
 
 [sub_resource type="AtlasTexture" id=42]
 atlas = ExtResource( 9 )
@@ -527,7 +516,7 @@ shape = SubResource( 3 )
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2( 0, -2 )
+position = Vector2( 0, 7.75 )
 shape = SubResource( 41 )
 
 [node name="Grounddetecter" type="RayCast2D" parent="."]
@@ -543,7 +532,6 @@ cast_to = Vector2( 50, 0 )
 one_shot = true
 
 [node name="effect" type="AnimatedSprite" parent="."]
-visible = false
 scale = Vector2( 2, 2 )
 frames = SubResource( 45 )
 animation = "effect"
@@ -551,4 +539,5 @@ animation = "effect"
 [connection signal="body_entered" from="Detectplayer" to="." method="_on_Detectplayer_body_entered"]
 [connection signal="body_exited" from="Detectplayer" to="." method="_on_Detectplayer_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_AttackArea_body_exited"]
 [connection signal="timeout" from="turn_around_timer" to="." method="_on_turn_around_timer_timeout"]
