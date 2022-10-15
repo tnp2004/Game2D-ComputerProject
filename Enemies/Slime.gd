@@ -22,6 +22,7 @@ func dead():
 func decrease_health(damage):
 	health -= damage
 	FSM.set_state(FSM.states.hurt)
+	$HealthBar._on_health_updated(health)
 	if health <= 0:
 		dead()
 
