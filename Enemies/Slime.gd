@@ -3,7 +3,7 @@ extends KinematicBody2D
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 onready var FSM = get_node("Slime_FSM")
 
-export(int) var max_health = 20
+export(int) var max_health = 200
 var health = max_health
 var isDead = false
 
@@ -13,6 +13,14 @@ const FRICTION = 0.5
 const GRAVITY = 1000
 var velocity = Vector2.ZERO
 var attack_damage = [2, 3, 4]
+
+var knockback_force = 1000
+var knockup_force = - 200
+func knockback(player_is_flip):
+	var direction = - 1 if player_is_flip else 1
+	velocity.x = lerp(velocity.x, knockback_force, 0.5) * direction
+	velocity.y = lerp(0, knockup_force, 0.6)
+	velocity = move_and_slide(velocity, Vector2.UP)
 
 # Health
 func dead():

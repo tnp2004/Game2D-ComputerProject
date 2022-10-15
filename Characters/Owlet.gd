@@ -20,6 +20,7 @@ var velocity = Vector2.ZERO
 
 var normal_color = Color(1, 1, 1)
 var transform_color = Color(1, 0.5, 0)
+var player_transform_color = Color(0.91, 0.56, 0.41)
 var effect_color = normal_color
 var buff_damage = 0
 
@@ -125,6 +126,7 @@ func most_of_arr(arr):
 
 var normal_attack = [2, 3, 4, 5]
 func do_damage(body, damage_arr):
+	body.knockback($AnimatedSprite.flip_h)
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
 func useDash_skill():
@@ -159,6 +161,7 @@ func useTransform_skill():
 func transform_skill():
 	buff_damage += 1000
 	effect_color = transform_color
+	$AnimatedSprite.modulate = player_transform_color
 	$TransformTimer.start()
 	$TransformSprite.visible = true
 	$TransformPlayer.play("skill_3")
@@ -166,6 +169,7 @@ func transform_skill():
 func stop_transform_skill():
 	buff_damage -= 1000
 	effect_color = normal_color
+	$AnimatedSprite.modulate = normal_color
 	$TransformSprite.visible = false
 	$TransformPlayer.stop()
 
