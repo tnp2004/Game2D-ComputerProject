@@ -11,11 +11,10 @@ func _ready():
 
 func _state_logic(_delta: float) -> void:
 	if !parent.isDead:
-		if parent.isChase and animation_player.current_animation != "attack":
+		if parent.isChase:
 			parent.chase_player()
-		if animation_player.current_animation != "attack":
-			parent.turn_around()
-			parent.walk_around()
+		parent.turn_around()
+		parent.walk_around()
 		parent.isFlip()
 		parent.hide_attack_effect()
 

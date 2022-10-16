@@ -1,13 +1,13 @@
 extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
-onready var FSM = get_node("Slime_FSM")
+onready var FSM = get_node("Crab_FSM")
 
 export(int) var max_health = 200
 var health = max_health
 var isDead = false
 
-export(int) var SPEED = 200
+export(int) var SPEED = 100
 var JUMPFORCE = 100
 const FRICTION = 0.5
 const GRAVITY = 1000
@@ -89,6 +89,7 @@ func isFlip():
 		$AnimatedSprite.flip_h = false
 		$Grounddetecter.position.x = 36
 		$Walldetecter.cast_to.x = 50
+	$effect.flip_h = $AnimatedSprite.flip_h
 
 func chase_player():
 	var to_player = (get_player_node().position - position).normalized()
