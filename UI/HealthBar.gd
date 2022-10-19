@@ -18,7 +18,7 @@ func _on_health_updated(health):
 	self.visible = true
 	
 	_assign_color(health)
-	
+
 func _assign_color(health):
 	if health < health_over.max_value * danger_zone:
 		health_over.tint_progress = danger_color
@@ -30,3 +30,5 @@ func _assign_color(health):
 func _on_max_health_updated():
 	health_over.max_value = get_parent().max_health
 	health_under.max_value = get_parent().max_health
+	health_over.value = get_parent().health
+	print(get_parent() ,get_parent().max_health)

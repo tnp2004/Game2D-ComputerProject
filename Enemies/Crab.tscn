@@ -1,7 +1,7 @@
 [gd_scene load_steps=52 format=2]
 
-[ext_resource path="res://Crab_FSM.gd" type="Script" id=1]
-[ext_resource path="res://Crab.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/Crab_FSM.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/Crab.gd" type="Script" id=2]
 [ext_resource path="res://Enemies-Sprite/Crab/Crab_Idle.png" type="Texture" id=3]
 [ext_resource path="res://Enemies-Sprite/Crab/Crab_AttackA_FX.png" type="Texture" id=4]
 [ext_resource path="res://Enemies-Sprite/Crab/Crab_Run.png" type="Texture" id=5]

@@ -78,7 +78,6 @@ func _on_AttackArea_body_entered(body):
 	if body.is_in_group("player"):
 		if !body.isDead:
 			attacking(body)
-	print(body)
 
 func isFlip():
 	if velocity.x < 0:
@@ -123,4 +122,4 @@ func _on_turn_around_timer_timeout():
 	is_turn_around_cooldown = false
 
 func _on_AttackArea_body_exited(body):
-	print("exit",body)
+	pass
