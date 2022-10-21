@@ -119,6 +119,3 @@ func _on_Detectplayer_body_exited(body):
 
 func _on_turn_around_timer_timeout():
 	is_turn_around_cooldown = false
-
-func _on_AttackArea_body_exited(body):
-	pass

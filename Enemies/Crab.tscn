@@ -545,5 +545,4 @@ rect_scale = Vector2( 0.1, 0.1 )
 [connection signal="body_entered" from="Detectplayer" to="." method="_on_Detectplayer_body_entered"]
 [connection signal="body_exited" from="Detectplayer" to="." method="_on_Detectplayer_body_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
-[connection signal="body_exited" from="AttackArea" to="." method="_on_AttackArea_body_exited"]
 [connection signal="timeout" from="turn_around_timer" to="." method="_on_turn_around_timer_timeout"]
