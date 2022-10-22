@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
-const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
-const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
+const WATERBALL = preload("res://Skills/Pink/Waterball.tscn") #skill 1
+const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") # only owlet skill
 const TORNADO = preload("res://Skills/Pink/Tornado.tscn") #skill 2
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
@@ -129,20 +129,18 @@ func do_damage(body, damage_arr):
 	body.knockback($AnimatedSprite.flip_h)
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
-func useDash_skill():
+func useWaterball():
 	if Input.is_action_just_pressed("skill_1"):
 		FSM.set_state(FSM.states.skill_1)
-		dash_skill()
+		WaterBall()
+		$WaterballTimer2.start()
+		$WaterballTimer3.start()
 
-func dash_skill():
-	var skill_1 = DASH_SKILL.instance()
-	var smoke = DASH_SMOKE.instance()
-	skill_1.effect(position, $AnimatedSprite.flip_h, effect_color)
-	smoke.dash_smoke_effect(position, $AnimatedSprite.flip_h, effect_color)
-	position.x += 220 * -1 if $AnimatedSprite.flip_h else 220 * 1
-	get_tree().current_scene.add_child(skill_1)
-	get_tree().current_scene.add_child(smoke)
-
+func WaterBall():
+	var skill_1_phate_1 = WATERBALL.instance()
+	skill_1_phate_1.waterball(position, $AnimatedSprite.flip_h, effect_color)
+	get_tree().current_scene.add_child(skill_1_phate_1)
+	
 func useTornado_skill():
 	if Input.is_action_just_pressed("skill_2"):
 		FSM.set_state(FSM.states.skill_2)
@@ -175,3 +173,9 @@ func stop_transform_skill():
 
 func _on_TransformTimer_timeout():
 	stop_transform_skill()
+
+func _on_WaterballTimer_timeout():
+	WaterBall()
+
+func _on_WaterballStopTimer_timeout():
+	WaterBall()

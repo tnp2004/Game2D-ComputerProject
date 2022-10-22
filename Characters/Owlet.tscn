@@ -985,6 +985,7 @@ tracks/1/keys = {
 }
 
 [node name="Owlet" type="KinematicBody2D" groups=["player"]]
+scale = Vector2( 2, 2 )
 collision_layer = 2
 collision_mask = 5
 script = ExtResource( 3 )

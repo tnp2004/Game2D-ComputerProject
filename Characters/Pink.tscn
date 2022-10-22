@@ -1,17 +1,17 @@
-[gd_scene load_steps=144 format=2]
+[gd_scene load_steps=146 format=2]
 
 [ext_resource path="res://Characters/Pink_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pink.gd" type="Script" id=2]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Attack2_6.png" type="Texture" id=3]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Jump_8.png" type="Texture" id=4]
 [ext_resource path="res://VFX/Owlet-Skills/transform/16_sunburn_spritesheet.png" type="Texture" id=5]
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=6]
+[ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Throw_4.png" type="Texture" id=6]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Hurt_4.png" type="Texture" id=7]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Walk+Attack_6.png" type="Texture" id=8]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Death_8.png" type="Texture" id=9]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Hurt_4.png" type="Texture" id=10]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Idle_4.png" type="Texture" id=11]
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Push_6.png" type="Texture" id=12]
+[ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Push_6.png" type="Texture" id=12]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Attack2_6.png" type="Texture" id=13]
 [ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=15]
@@ -336,7 +336,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=135]
 resource_name = "skill_1"
-length = 0.2
+length = 0.35
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -356,10 +356,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1 ]
+"values": [ 0, 1, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=136]
@@ -566,21 +566,29 @@ region = Rect2( 128, 0, 32, 32 )
 atlas = ExtResource( 18 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=46]
+[sub_resource type="AtlasTexture" id=179]
 atlas = ExtResource( 6 )
-region = Rect2( 128, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 6 )
-region = Rect2( 160, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 12 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 12 )
+[sub_resource type="AtlasTexture" id=180]
+atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=181]
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=182]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=183]
+atlas = ExtResource( 12 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=184]
+atlas = ExtResource( 12 )
+region = Rect2( 160, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=106]
 atlas = ExtResource( 13 )
@@ -645,12 +653,12 @@ animations = [ {
 "name": "run",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 46 ), SubResource( 47 ) ],
+"frames": [ SubResource( 179 ), SubResource( 180 ), SubResource( 181 ), SubResource( 182 ) ],
 "loop": true,
 "name": "skill_1",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 43 ), SubResource( 44 ) ],
+"frames": [ SubResource( 183 ), SubResource( 184 ) ],
 "loop": true,
 "name": "skill_2",
 "speed": 5.0
@@ -985,6 +993,8 @@ tracks/1/keys = {
 
 [node name="Pink" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
+collision_layer = 2
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Pink_FSM" type="Node" parent="."]
@@ -1058,4 +1068,15 @@ margin_right = -234.0
 margin_bottom = -134.0
 rect_scale = Vector2( 0.2, 0.2 )
 
+[node name="WaterballTimer2" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="WaterballTimer3" type="Timer" parent="."]
+wait_time = 0.55
+one_shot = true
+
+[connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
+[connection signal="timeout" from="WaterballTimer2" to="." method="_on_WaterballTimer_timeout"]
+[connection signal="timeout" from="WaterballTimer3" to="." method="_on_WaterballStopTimer_timeout"]

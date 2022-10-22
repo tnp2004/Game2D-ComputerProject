@@ -19,7 +19,7 @@ func _ready():
 func _state_logic(_delta: float) -> void:
 	if !parent.isDead:
 		parent.get_input_direction()
-		parent.useDash_skill()
+		parent.useWaterball()
 		parent.useTornado_skill()
 		parent.useTransform_skill()
 		if parent.velocity.length() == 0:

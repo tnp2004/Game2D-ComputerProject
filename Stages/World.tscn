@@ -46,4 +46,4 @@ position = Vector2( 682, -26 )
 position = Vector2( 58, -29 )
 
 [node name="Pink" parent="." instance=ExtResource( 5 )]
-position = Vector2( -32, -33 )
+position = Vector2( 181, -48 )

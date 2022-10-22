@@ -111,6 +111,7 @@ func turn_around():
 
 func _on_Detectplayer_body_entered(body):
 	if body.is_in_group("player"):
+		print(body)
 		isChase = true
 
 func _on_Detectplayer_body_exited(body):
