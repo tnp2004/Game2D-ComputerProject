@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 const WATERBALL = preload("res://Skills/Pink/Waterball.tscn") #skill 1
-const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") # only owlet skill
 const TORNADO = preload("res://Skills/Pink/Tornado.tscn") #skill 2
+const EARTHSPIKE = preload("res://Skills/Pink/EarthSpike.tscn") #skill 3
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
 export(int) var max_health = 200
@@ -150,6 +150,16 @@ func tornado_skill():
 	var skill_2 = TORNADO.instance()
 	skill_2.tornado(position, $AnimatedSprite.flip_h, effect_color)
 	get_tree().current_scene.add_child(skill_2)
+
+func useEarthspike_skill():
+	if Input.is_action_just_pressed("skill_3"):
+		FSM.set_state(FSM.states.skill_3)
+		earthspike_skill()
+		
+func earthspike_skill():
+	var skill_3 = EARTHSPIKE.instance()
+	skill_3.Earthspike(position, $AnimatedSprite.flip_h, effect_color)
+	get_tree().current_scene.add_child(skill_3)
 
 func useTransform_skill():
 	if Input.is_action_just_pressed("skill_3"):

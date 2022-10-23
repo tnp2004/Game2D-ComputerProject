@@ -21,7 +21,7 @@ func _state_logic(_delta: float) -> void:
 		parent.get_input_direction()
 		parent.useWaterball()
 		parent.useTornado_skill()
-		parent.useTransform_skill()
+		parent.useEarthspike_skill()
 		if parent.velocity.length() == 0:
 			parent.attack_combo(_delta)
 		else:
