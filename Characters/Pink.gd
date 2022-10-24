@@ -152,7 +152,7 @@ func tornado_skill():
 	get_tree().current_scene.add_child(skill_2)
 
 func useEarthspike_skill():
-	if Input.is_action_just_pressed("skill_3"):
+	if Input.is_action_just_pressed("skill_3") and is_on_floor():
 		FSM.set_state(FSM.states.skill_3)
 		earthspike_skill()
 		
@@ -161,28 +161,6 @@ func earthspike_skill():
 	skill_3.Earthspike(position, $AnimatedSprite.flip_h, effect_color)
 	get_tree().current_scene.add_child(skill_3)
 
-func useTransform_skill():
-	if Input.is_action_just_pressed("skill_3"):
-		FSM.set_state(FSM.states.skill_3)
-		transform_skill()
-
-func transform_skill():
-	buff_damage += 1000
-	effect_color = transform_color
-	$AnimatedSprite.modulate = player_transform_color
-	$TransformTimer.start()
-	$TransformSprite.visible = true
-	$TransformPlayer.play("skill_3")
-	
-func stop_transform_skill():
-	buff_damage -= 1000
-	effect_color = normal_color
-	$AnimatedSprite.modulate = normal_color
-	$TransformSprite.visible = false
-	$TransformPlayer.stop()
-
-func _on_TransformTimer_timeout():
-	stop_transform_skill()
 
 func _on_WaterballTimer_timeout():
 	WaterBall()

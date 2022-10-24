@@ -36,8 +36,8 @@ func get_player_node():
 
 func wall_check():
 	if $RayCast2D.is_colliding():
-		var wall = $RayCast2D.get_collider().name
-		if wall == "TileMap":
+		var wall = $RayCast2D.get_collider().is_in_group("floor")
+		if wall:
 			$AnimationPlayer.play("stop")
 
 func _on_SkillArea_body_entered(body):
@@ -45,8 +45,9 @@ func _on_SkillArea_body_entered(body):
 		get_tree().current_scene.get_child(get_player_node()).do_damage(body, damage_tornado_skill)
 
 func _on_FloorCheck_body_entered(body):
-	if body.name == "TileMap":
+	if body.is_in_group("floor"):
 		isOnfloor = true
 
 func _on_FloorCheck_body_exited(body):
-	isOnfloor = false
+	if body.is_in_group("floor"):
+		isOnfloor = false

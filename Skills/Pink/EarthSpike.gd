@@ -33,5 +33,5 @@ func _on_SkillArea_body_entered(body):
 		get_tree().current_scene.get_child(get_player_node()).do_damage(body, damage_earth_spike_skill)
 
 func _on_FloorCheck_body_entered(body):
-	if body.name == "TileMap":
+	if body.is_in_group("floor"):
 		isOnfloor = true
