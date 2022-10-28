@@ -545,7 +545,6 @@ cast_to = Vector2( 50, 0 )
 one_shot = true
 
 [node name="effect" type="AnimatedSprite" parent="."]
-visible = false
 scale = Vector2( 2, 2 )
 frames = SubResource( 45 )
 animation = "effect"

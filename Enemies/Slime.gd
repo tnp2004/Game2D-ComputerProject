@@ -75,9 +75,8 @@ func attacking(body):
 	body.decrease_health(random_thing_in_array(attack_damage), $AnimatedSprite.flip_h)
 
 func _on_AttackArea_body_entered(body):
-	if body.is_in_group("player"):
-		if !body.isDead:
-			attacking(body)
+	if body.is_in_group("player") and !isDead:
+		attacking(body)
 
 func isFlip():
 	if velocity.x < 0:
