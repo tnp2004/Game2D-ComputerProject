@@ -23,6 +23,8 @@ var transform_color = Color(1, 0.5, 0)
 var player_transform_color = Color(0.91, 0.56, 0.41)
 var effect_color = normal_color
 var buff_damage = 0
+var earth_spike_cast_to = 50
+var earth_spike_pos = 29
 
 func get_input_direction():
 	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -34,10 +36,14 @@ func get_input_direction():
 	if direction < 0:
 		$AnimatedSprite.flip_h = true # flip character
 		$attackArea.position.x = -42 # set position of attackArea
+		$canEarthspike.cast_to.x = - earth_spike_cast_to
+		$canEarthspike.position.x = - earth_spike_pos
 		
 	if direction > 0:
 		$AnimatedSprite.flip_h = false # flip character
 		$attackArea.position.x = 0 # set position of attackArea
+		$canEarthspike.cast_to.x = earth_spike_cast_to
+		$canEarthspike.position.x = earth_spike_pos
 
 var knockback_force = 3000
 var knockup_force = - 400
@@ -152,7 +158,7 @@ func tornado_skill():
 	get_tree().current_scene.add_child(skill_2)
 
 func useEarthspike_skill():
-	if Input.is_action_just_pressed("skill_3") and is_on_floor():
+	if Input.is_action_just_pressed("skill_3") and $canEarthspike.is_colliding() and $canEarthspike.get_collider().is_in_group("floor"):
 		FSM.set_state(FSM.states.skill_3)
 		earthspike_skill()
 		

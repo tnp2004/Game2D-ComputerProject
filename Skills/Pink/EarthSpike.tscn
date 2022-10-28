@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://VFX/Pink-Skills/Earth_Spike/009.png" type="Texture" id=1]
 [ext_resource path="res://VFX/Pink-Skills/Earth_Spike/001.png" type="Texture" id=2]
@@ -121,9 +121,6 @@ tracks/3/keys = {
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 24.5, 12.25 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 4.75, 3.25 )
-
 [node name="EarthSpike" type="Node2D"]
 scale = Vector2( 2, 2 )
 script = ExtResource( 10 )
@@ -143,11 +140,4 @@ anims/up = SubResource( 3 )
 position = Vector2( 0, 20.25 )
 shape = SubResource( 4 )
 
-[node name="FloorCheck" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorCheck"]
-position = Vector2( -0.25, 28.75 )
-shape = SubResource( 5 )
-
 [connection signal="body_entered" from="SkillArea" to="." method="_on_SkillArea_body_entered"]
-[connection signal="body_entered" from="FloorCheck" to="." method="_on_FloorCheck_body_entered"]
