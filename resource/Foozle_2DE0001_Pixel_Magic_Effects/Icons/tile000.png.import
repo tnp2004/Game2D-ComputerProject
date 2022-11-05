@@ -1,0 +1,35 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/tile000.png-d10103652f2c6428c8382d1cb0b1d571.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://resource/Foozle_2DE0001_Pixel_Magic_Effects/Icons/tile000.png"
+dest_files=[ "res://.import/tile000.png-d10103652f2c6428c8382d1cb0b1d571.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+process/normal_map_invert_y=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

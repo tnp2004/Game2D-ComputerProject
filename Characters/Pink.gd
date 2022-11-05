@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
+const NORMAL_ATTACK = preload("res://Skills/Pink/Fireball.tscn") #normal attack
 const WATERBALL = preload("res://Skills/Pink/Waterball.tscn") #skill 1
 const TORNADO = preload("res://Skills/Pink/Tornado.tscn") #skill 2
 const EARTHSPIKE = preload("res://Skills/Pink/EarthSpike.tscn") #skill 3
@@ -25,6 +26,7 @@ var effect_color = normal_color
 var buff_damage = 0
 var earth_spike_cast_to = 50
 var earth_spike_pos = 29
+var attack_cooldown = false
 
 func get_input_direction():
 	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -74,25 +76,20 @@ func decrease_health(damage, enemy_direction):
 		dead()
 		
 # attack
-var attack_stage = 1
-var time = 0
-func attack_combo(delta):
-	time += delta # This is stopwatch
-	if Input.is_action_just_pressed("left_click") and attack_stage == 1:
+func attack():
+	if Input.is_action_just_pressed("left_click") and !attack_cooldown:
 		FSM.set_state(FSM.states.attack_1)
-		attack_stage = 2
-		
-	elif Input.is_action_just_pressed("left_click") and attack_stage == 2:
-		FSM.set_state(FSM.states.attack_2)
-		attack_stage = 1
-	
-	if time > 1:
-		attack_stage = 1
-		time = 0
+		use_normal_attack()
 
 func attack_and_run():
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_just_pressed("left_click") and !attack_cooldown:
 		FSM.set_state(FSM.states.attack_run)
+		use_normal_attack()
+
+func use_normal_attack():
+	attack_cooldown = true
+	$attackCD.start()
+	normal_attack()
 
 func current_state_label():
 	$currentState.text = $AnimationPlayer.current_animation
@@ -166,10 +163,17 @@ func earthspike_skill():
 	var skill_3 = EARTHSPIKE.instance()
 	skill_3.Earthspike(position, $AnimatedSprite.flip_h, effect_color)
 	get_tree().current_scene.add_child(skill_3)
-
+		
+func normal_attack():
+	var fire = NORMAL_ATTACK.instance()
+	fire.normal_attack(position, $AnimatedSprite.flip_h, effect_color)
+	get_tree().current_scene.add_child(fire)
 
 func _on_WaterballTimer_timeout():
 	WaterBall()
 
 func _on_WaterballStopTimer_timeout():
 	WaterBall()
+
+func _on_attackCD_timeout():
+	attack_cooldown = false

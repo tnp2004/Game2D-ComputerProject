@@ -23,7 +23,7 @@ func _state_logic(_delta: float) -> void:
 		parent.useTornado_skill()
 		parent.useEarthspike_skill()
 		if parent.velocity.length() == 0:
-			parent.attack_combo(_delta)
+			parent.attack()
 		else:
 			parent.attack_and_run()
 
