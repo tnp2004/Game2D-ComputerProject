@@ -114,7 +114,7 @@ func spawn_damageIndicator(damage):
 
 func _on_attackArea_body_entered(body):
 	if body.is_in_group("enemy"):
-		do_damage(body, normal_attack)
+		do_damage(body, normal_attack_damage)
 
 func random_thing_in_array(arr):
 	var randomResult = randi()%len(arr)
@@ -127,7 +127,7 @@ func most_of_arr(arr):
 			most_number = i
 	return most_number
 
-var normal_attack = [2, 3, 4, 5]
+var normal_attack_damage = [2, 3, 4, 5]
 func do_damage(body, damage_arr):
 	body.knockback($AnimatedSprite.flip_h)
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)

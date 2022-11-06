@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Fireball.gd" type="Script" id=1]
+[ext_resource path="res://Skills/Dude/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://VFX/Pink-Skills/Fire_Ball/002.png" type="Texture" id=2]
 [ext_resource path="res://VFX/Pink-Skills/Fire_Ball/003.png" type="Texture" id=3]
 [ext_resource path="res://VFX/Pink-Skills/Fire_Ball/007.png" type="Texture" id=4]
