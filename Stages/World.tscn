@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://UI/pickCharTest.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Enemies/Slime.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/Crab.tscn" type="PackedScene" id=4]
 
@@ -46,3 +47,9 @@ position = Vector2( 58, -29 )
 
 [node name="player_spawner" type="Position2D" parent="."]
 position = Vector2( -560, -78 )
+
+[node name="pickCharTest" parent="." instance=ExtResource( 2 )]
+margin_left = -341.0
+margin_top = -212.0
+margin_right = 939.0
+margin_bottom = 508.0
