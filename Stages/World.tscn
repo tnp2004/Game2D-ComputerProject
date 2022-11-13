@@ -43,12 +43,13 @@ tile_data = PoolIntArray( -131066, 0, 0, -131065, 0, 0, -65531, 0, 0, -65528, 0,
 position = Vector2( 682, -26 )
 
 [node name="Crab" parent="." instance=ExtResource( 4 )]
-position = Vector2( 58, -29 )
+position = Vector2( 37, -30 )
 
 [node name="player_spawner" type="Position2D" parent="."]
 position = Vector2( -560, -78 )
 
 [node name="pickCharTest" parent="." instance=ExtResource( 2 )]
+visible = false
 margin_left = -341.0
 margin_top = -212.0
 margin_right = 939.0

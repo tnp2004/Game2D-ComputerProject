@@ -20,8 +20,8 @@ func _state_logic(_delta: float) -> void:
 	if !parent.isDead:
 		parent.get_input_direction()
 		parent.useDash_skill()
-		parent.useWindCutter_skill()
-		parent.useTransform_skill()
+		parent.useNormal_Attack()
+		parent.walk_logic()
 		if parent.velocity.length() == 0:
 			parent.attack_combo(_delta)
 		else:

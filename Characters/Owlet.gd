@@ -159,7 +159,7 @@ func useTransform_skill():
 		transform_skill()
 
 func transform_skill():
-	buff_damage += 1000
+	buff_damage += 15
 	effect_color = transform_color
 	$AnimatedSprite.modulate = player_transform_color
 	$TransformTimer.start()

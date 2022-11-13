@@ -1,0 +1,119 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://UI-Sprite/button/green_button01.png" type="Texture" id=1]
+[ext_resource path="res://UI-Sprite/button/green_button02.png" type="Texture" id=2]
+[ext_resource path="res://UI-Sprite/button/green_button00.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/Kenney Future Narrow.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://test_bg.png" type="Texture" id=5]
+[ext_resource path="res://UI/Mainmenu.gd" type="Script" id=6]
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+outline_size = 2
+outline_color = Color( 0.0156863, 0.0156863, 0.0156863, 1 )
+use_mipmaps = true
+font_data = ExtResource( 4 )
+
+[node name="Mainmenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+margin_right = 1280.0
+margin_bottom = 720.0
+texture = ExtResource( 5 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 835.0
+margin_top = 102.0
+margin_right = 1025.0
+margin_bottom = 343.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="PlayButton" type="TextureButton" parent="VBoxContainer"]
+margin_right = 190.0
+margin_bottom = 45.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainer/PlayButton"]
+margin_left = 39.0
+margin_right = 152.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 1 )
+text = "PLAY"
+align = 1
+valign = 1
+
+[node name="ShopButton2" type="TextureButton" parent="VBoxContainer"]
+margin_top = 49.0
+margin_right = 190.0
+margin_bottom = 94.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainer/ShopButton2"]
+margin_left = 39.0
+margin_right = 152.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 1 )
+text = "shop"
+align = 1
+valign = 1
+
+[node name="InfoButton3" type="TextureButton" parent="VBoxContainer"]
+margin_top = 98.0
+margin_right = 190.0
+margin_bottom = 143.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainer/InfoButton3"]
+margin_left = 39.0
+margin_right = 152.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 1 )
+text = "info"
+align = 1
+valign = 1
+
+[node name="HelpButton4" type="TextureButton" parent="VBoxContainer"]
+margin_top = 147.0
+margin_right = 190.0
+margin_bottom = 192.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainer/HelpButton4"]
+margin_left = 39.0
+margin_right = 152.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 1 )
+text = "Help"
+align = 1
+valign = 1
+
+[node name="QuitButton5" type="TextureButton" parent="VBoxContainer"]
+margin_top = 196.0
+margin_right = 190.0
+margin_bottom = 241.0
+texture_normal = ExtResource( 1 )
+texture_pressed = ExtResource( 2 )
+texture_hover = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainer/QuitButton5"]
+margin_left = 39.0
+margin_right = 152.0
+margin_bottom = 45.0
+custom_fonts/font = SubResource( 1 )
+text = "Quit"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]

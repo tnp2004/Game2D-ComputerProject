@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
+const ROCK_PROJECTILE = preload("res://Skills/Dude/RockProjectile.tscn") # normal attack
 const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
 const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
@@ -12,6 +13,7 @@ var isDead = false
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
+var mouse_pos
 
 onready var FSM = get_node("Dude_FSM")
 
@@ -23,21 +25,30 @@ var transform_color = Color(1, 0.5, 0)
 var player_transform_color = Color(0.91, 0.56, 0.41)
 var effect_color = normal_color
 var buff_damage = 0
+var walk_dir
 
 func get_input_direction():
-	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	velocity.x = direction * WALKSPEED
+	walk_dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	velocity.x = walk_dir * WALKSPEED
 	
 	if Input.is_action_pressed("ui_up") and is_on_floor():
 		velocity.y = - JUMPFORCE
 	
-	if direction < 0:
+	if mouse_pos.x < 640:
 		$AnimatedSprite.flip_h = true # flip character
 		$attackArea.position.x = -42 # set position of attackArea
 		
-	if direction > 0:
+	if mouse_pos.x > 640:
 		$AnimatedSprite.flip_h = false # flip character
 		$attackArea.position.x = 0 # set position of attackArea
+
+func walk_logic():
+	if mouse_pos.x < 640 and walk_dir == 1:
+		WALKSPEED = 150
+	elif mouse_pos.x > 640 and walk_dir == -1:
+		WALKSPEED = 150
+	else:
+		WALKSPEED = 300
 
 var knockback_force = 3000
 var knockup_force = - 400
@@ -95,6 +106,7 @@ func _physics_process(_delta):
 	velocity.y += _delta * GRAVITY
 	velocity = move_and_slide(velocity, Vector2.UP)
 	current_state_label()
+	mouse_pos = get_viewport().get_mouse_position()
 
 # damage indicator
 func spawn_effect(EFFECT, effect_position = global_position):
@@ -143,35 +155,13 @@ func dash_skill():
 	get_tree().current_scene.add_child(skill_1)
 	get_tree().current_scene.add_child(smoke)
 
-func useWindCutter_skill():
+func useNormal_Attack():
 	if Input.is_action_just_pressed("skill_2"):
 		FSM.set_state(FSM.states.skill_2)
-		wind_cutter_skill()
+		normal_attack()
 		
-func wind_cutter_skill():
-	var skill_2 = WIND_CUTTER.instance()
-	skill_2.wind_cutter(position, $AnimatedSprite.flip_h, effect_color)
-	get_tree().current_scene.add_child(skill_2)
-
-func useTransform_skill():
-	if Input.is_action_just_pressed("skill_3"):
-		FSM.set_state(FSM.states.skill_3)
-		transform_skill()
-
-func transform_skill():
-	buff_damage += 1000
-	effect_color = transform_color
-	$AnimatedSprite.modulate = player_transform_color
-	$TransformTimer.start()
-	$TransformSprite.visible = true
-	$TransformPlayer.play("skill_3")
-	
-func stop_transform_skill():
-	buff_damage -= 1000
-	effect_color = normal_color
-	$AnimatedSprite.modulate = normal_color
-	$TransformSprite.visible = false
-	$TransformPlayer.stop()
-
-func _on_TransformTimer_timeout():
-	stop_transform_skill()
+func normal_attack():
+	var normal_atk = ROCK_PROJECTILE.instance()
+	normal_atk.launch(position, $AnimatedSprite.flip_h, effect_color)
+	normal_atk.player_mouse_pos = mouse_pos
+	get_tree().current_scene.add_child(normal_atk)
