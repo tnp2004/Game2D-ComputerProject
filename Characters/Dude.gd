@@ -6,6 +6,8 @@ const DASH_SKILL = preload("res://Skills/Owlet/Dash_Skill.tscn") #skill 1
 const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
+const EXPLOSION = preload("res://Skills/Dude/Explosion.tscn") #Explosion skill
+const SPIKEBALL = preload("res://Skills/Dude/SpikeBall.tscn") #Spikeball skill
 
 export(int) var max_health = 200
 var health = max_health
@@ -26,6 +28,8 @@ var player_transform_color = Color(0.91, 0.56, 0.41)
 var effect_color = normal_color
 var buff_damage = 0
 var walk_dir
+var normal_range = 5
+var improve_skill = 0
 
 func get_input_direction():
 	walk_dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -36,11 +40,9 @@ func get_input_direction():
 	
 	if mouse_pos.x < 640:
 		$AnimatedSprite.flip_h = true # flip character
-		$attackArea.position.x = -42 # set position of attackArea
 		
 	if mouse_pos.x > 640:
 		$AnimatedSprite.flip_h = false # flip character
-		$attackArea.position.x = 0 # set position of attackArea
 
 func walk_logic():
 	if mouse_pos.x < 640 and walk_dir == 1:
@@ -121,10 +123,6 @@ func spawn_damageIndicator(damage):
 	if indicator:
 		indicator.label.text = str(damage)
 
-func _on_attackArea_body_entered(body):
-	if body.is_in_group("enemy"):
-		do_damage(body, normal_attack)
-
 func random_thing_in_array(arr):
 	var randomResult = randi()%len(arr)
 	return arr[randomResult]
@@ -136,32 +134,52 @@ func most_of_arr(arr):
 			most_number = i
 	return most_number
 
-var normal_attack = [2, 3, 4, 5]
+var normal_attack_damage = [2, 3, 4, 5]
 func do_damage(body, damage_arr):
 	body.knockback($AnimatedSprite.flip_h)
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
-func useDash_skill():
-	if Input.is_action_just_pressed("skill_1"):
-		FSM.set_state(FSM.states.skill_1)
-		dash_skill()
-
-func dash_skill():
-	var skill_1 = DASH_SKILL.instance()
-	var smoke = DASH_SMOKE.instance()
-	skill_1.effect(position, $AnimatedSprite.flip_h, effect_color)
-	smoke.dash_smoke_effect(position, $AnimatedSprite.flip_h, effect_color)
-	position.x += 220 * -1 if $AnimatedSprite.flip_h else 220 * 1
-	get_tree().current_scene.add_child(skill_1)
-	get_tree().current_scene.add_child(smoke)
-
 func useNormal_Attack():
-	if Input.is_action_just_pressed("skill_2"):
+	if Input.is_action_just_pressed("left_click"):
 		FSM.set_state(FSM.states.skill_2)
 		normal_attack()
 		
 func normal_attack():
 	var normal_atk = ROCK_PROJECTILE.instance()
-	normal_atk.launch(position, $AnimatedSprite.flip_h, effect_color)
-	normal_atk.player_mouse_pos = mouse_pos
+	normal_atk.normal_attack(position, $AnimatedSprite.flip_h, effect_color)
+	normal_atk.fall_speed -= improve_skill
 	get_tree().current_scene.add_child(normal_atk)
+
+func useExplosion():
+	if Input.is_action_just_pressed("skill_1"):
+		FSM.set_state(FSM.states.skill_2)
+		explosion()
+		
+func explosion():
+	var explosion_skill = EXPLOSION.instance()
+	explosion_skill.normal_attack(position, $AnimatedSprite.flip_h, effect_color)
+	explosion_skill.fall_speed -= improve_skill
+	get_tree().current_scene.add_child(explosion_skill)
+
+func useSpikeball():
+	if Input.is_action_just_pressed("skill_2"):
+		FSM.set_state(FSM.states.skill_2)
+		spikeball()
+		
+func spikeball():
+	var spikeball_skill = SPIKEBALL.instance()
+	spikeball_skill.normal_attack(position, $AnimatedSprite.flip_h, effect_color)
+	spikeball_skill.fall_speed -= improve_skill
+	get_tree().current_scene.add_child(spikeball_skill)
+
+func use_Selfimprove():
+	if Input.is_action_just_pressed("skill_3"):
+		FSM.set_state(FSM.states.skill_3)
+		selfimprove()
+
+func selfimprove():
+	$Timer.start()
+	improve_skill = 4
+
+func _on_Timer_timeout():
+	improve_skill = 0

@@ -1,23 +1,28 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://Characters-Sprite/3 Dude_Monster/Rock2.png" type="Texture" id=1]
-[ext_resource path="res://Characters-Sprite/3 Dude_Monster/Rock1.png" type="Texture" id=2]
-[ext_resource path="res://Skills/Dude/RockProjectile.gd" type="Script" id=3]
+[ext_resource path="res://VFX/Dude-Skills/Explosion/002.png" type="Texture" id=1]
+[ext_resource path="res://VFX/Dude-Skills/Explosion/003.png" type="Texture" id=2]
+[ext_resource path="res://Explosion.gd" type="Script" id=3]
+[ext_resource path="res://VFX/Dude-Skills/Explosion/005.png" type="Texture" id=4]
+[ext_resource path="res://VFX/Dude-Skills/Explosion/004.png" type="Texture" id=5]
+[ext_resource path="res://VFX/Dude-Skills/Explosion/006.png" type="Texture" id=6]
+[ext_resource path="res://VFX/Dude-Skills/Explosion/001.png" type="Texture" id=7]
+[ext_resource path="res://VFX/Dude-Skills/Explosion/007.png" type="Texture" id=8]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "collide",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 1 ) ],
+"frames": [ ExtResource( 7 ) ],
 "loop": false,
 "name": "default",
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -44,8 +49,9 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "collide"
+length = 0.5
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
@@ -66,10 +72,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3, 4, 5 ]
 }
 tracks/2/type = "method"
 tracks/2/path = NodePath(".")
@@ -78,9 +84,12 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.05 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "Bomb"
+}, {
 "args": [  ],
 "method": "queue_free"
 } ]
@@ -114,11 +123,10 @@ tracks/1/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 6.5
+[sub_resource type="CircleShape2D" id=5]
+radius = 13.0
 
-[node name="RockProjectile" type="Node2D"]
-scale = Vector2( 2, 2 )
+[node name="Explosion" type="Node2D"]
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -126,17 +134,13 @@ frames = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "normal_attack"
-anims/RESET = SubResource( 3 )
-anims/collide = SubResource( 5 )
+anims/RESET = SubResource( 2 )
+anims/collide = SubResource( 3 )
 anims/normal_attack = SubResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="." groups=["player_attack"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 2 )
-
-[node name="isCollide" type="RayCast2D" parent="."]
-enabled = true
-cast_to = Vector2( 10, 6 )
+shape = SubResource( 5 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

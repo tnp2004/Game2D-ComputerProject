@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=77 format=2]
 
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Attack1_4.png" type="Texture" id=1]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Death_8.png" type="Texture" id=2]
@@ -43,18 +43,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [ 0 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/attackCollision:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ true ]
-}
 
 [sub_resource type="Animation" id=127]
 resource_name = "attack_1"
@@ -82,18 +70,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/attackCollision:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=128]
@@ -123,18 +99,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [ 0 ]
 }
-tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/attackCollision:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
-}
 
 [sub_resource type="Animation" id=129]
 resource_name = "attack_run"
@@ -162,18 +126,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("attackArea/attackCollision:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ false, true ]
 }
 
 [sub_resource type="Animation" id=130]
@@ -670,9 +622,6 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 13 )
 
-[sub_resource type="RectangleShape2D" id=141]
-extents = Vector2( 9.5, 10 )
-
 [node name="Dude" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
 script = ExtResource( 10 )
@@ -718,13 +667,6 @@ text = "state"
 align = 1
 valign = 1
 
-[node name="attackArea" type="Area2D" parent="." groups=["player_attack"]]
-
-[node name="attackCollision" type="CollisionShape2D" parent="attackArea"]
-position = Vector2( 19.5, 3 )
-shape = SubResource( 141 )
-disabled = true
-
 [node name="HealthBar" parent="." instance=ExtResource( 12 )]
 visible = true
 margin_left = -234.0
@@ -736,4 +678,8 @@ rect_scale = Vector2( 0.2, 0.2 )
 [node name="normalAttack_pos" type="Position2D" parent="."]
 position = Vector2( 17.5, 0 )
 
-[connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

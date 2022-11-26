@@ -19,7 +19,9 @@ func _ready():
 func _state_logic(_delta: float) -> void:
 	if !parent.isDead:
 		parent.get_input_direction()
-		parent.useDash_skill()
+		parent.useSpikeball()
+		parent.use_Selfimprove()
+		parent.useExplosion()
 		parent.useNormal_Attack()
 		parent.walk_logic()
 		if parent.velocity.length() == 0:
