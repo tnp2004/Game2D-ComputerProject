@@ -1,8 +1,8 @@
 [gd_scene load_steps=55 format=2]
 
-[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/HealthBar_monsters.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Bat_FSM.gd" type="Script" id=2]
-[ext_resource path="res://Bat.gd" type="Script" id=3]
+[ext_resource path="res://Enemies/Bat.gd" type="Script" id=3]
 [ext_resource path="res://Enemies-Sprite/Bat/Bat_Hit.png" type="Texture" id=4]
 [ext_resource path="res://Enemies-Sprite/Bat/Bat_Death.png" type="Texture" id=5]
 [ext_resource path="res://Enemies-Sprite/Bat/Bat_Attack_FX.png" type="Texture" id=6]

@@ -4,13 +4,13 @@
 [ext_resource path="res://Characters/Pink.gd" type="Script" id=2]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Attack2_6.png" type="Texture" id=3]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Jump_8.png" type="Texture" id=4]
+[ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Throw_4.png" type="Texture" id=6]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Walk+Attack_6.png" type="Texture" id=8]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Death_8.png" type="Texture" id=9]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Hurt_4.png" type="Texture" id=10]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Idle_4.png" type="Texture" id=11]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Push_6.png" type="Texture" id=12]
-[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Attack1_4.png" type="Texture" id=16]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Jump_8.png" type="Texture" id=17]
@@ -704,6 +704,7 @@ position = Vector2( -1.5, 3.5 )
 shape = SubResource( 139 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 102, -43 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 25.0
@@ -730,14 +731,6 @@ disabled = true
 wait_time = 20.0
 one_shot = true
 
-[node name="HealthBar" parent="." instance=ExtResource( 14 )]
-visible = true
-margin_left = -234.0
-margin_top = -134.0
-margin_right = -234.0
-margin_bottom = -134.0
-rect_scale = Vector2( 0.2, 0.2 )
-
 [node name="WaterballTimer2" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
@@ -754,6 +747,8 @@ cast_to = Vector2( 50, 0 )
 [node name="attackCD" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="HealthBar_player" parent="." instance=ExtResource( 5 )]
 
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]

@@ -8,6 +8,7 @@ const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
 export(int) var max_health = 200
 var health = max_health
+
 var isDead = false
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
@@ -62,7 +63,7 @@ func decrease_health(damage, enemy_direction):
 	spawn_damageIndicator(damage)
 	screen_shaker()
 	knockback(enemy_direction)
-	$HealthBar._on_health_updated(health)
+	$HealthBar_player._on_health_updated(health)
 	FSM.set_state(FSM.states.hurt)
 	if health <= 0:
 		dead()

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://VFX/Dude-Skills/Explosion/002.png" type="Texture" id=1]
 [ext_resource path="res://VFX/Dude-Skills/Explosion/003.png" type="Texture" id=2]
-[ext_resource path="res://Explosion.gd" type="Script" id=3]
+[ext_resource path="res://Skills/Dude/Explosion.gd" type="Script" id=3]
 [ext_resource path="res://VFX/Dude-Skills/Explosion/005.png" type="Texture" id=4]
 [ext_resource path="res://VFX/Dude-Skills/Explosion/004.png" type="Texture" id=5]
 [ext_resource path="res://VFX/Dude-Skills/Explosion/006.png" type="Texture" id=6]

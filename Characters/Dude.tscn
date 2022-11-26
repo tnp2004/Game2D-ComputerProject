@@ -8,9 +8,9 @@
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Hurt_4.png" type="Texture" id=6]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Push_6.png" type="Texture" id=7]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Jump_8.png" type="Texture" id=8]
+[ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Characters/Dude.gd" type="Script" id=10]
 [ext_resource path="res://Characters/Dude_FSM.gd" type="Script" id=11]
-[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=14]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Hurt_4.png" type="Texture" id=15]
@@ -652,6 +652,7 @@ position = Vector2( -1.5, 3.5 )
 shape = SubResource( 139 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 102, -43 )
 current = true
 smoothing_enabled = true
 smoothing_speed = 25.0
@@ -667,19 +668,13 @@ text = "state"
 align = 1
 valign = 1
 
-[node name="HealthBar" parent="." instance=ExtResource( 12 )]
-visible = true
-margin_left = -234.0
-margin_top = -134.0
-margin_right = -234.0
-margin_bottom = -134.0
-rect_scale = Vector2( 0.2, 0.2 )
-
 [node name="normalAttack_pos" type="Position2D" parent="."]
 position = Vector2( 17.5, 0 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
+
+[node name="HealthBar_player" parent="." instance=ExtResource( 9 )]
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

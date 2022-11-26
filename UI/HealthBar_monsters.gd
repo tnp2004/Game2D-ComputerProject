@@ -31,4 +31,3 @@ func _on_max_health_updated():
 	health_over.max_value = get_parent().max_health
 	health_under.max_value = get_parent().max_health
 	health_over.value = get_parent().health
-	print(get_parent() ,get_parent().max_health)

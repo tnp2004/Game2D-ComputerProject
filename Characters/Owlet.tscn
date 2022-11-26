@@ -14,7 +14,7 @@
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Death_8.png" type="Texture" id=12]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Rock2.png" type="Texture" id=13]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=14]
-[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=15]
+[ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=13]
 length = 0.001
@@ -1054,13 +1054,7 @@ anims/skill_3 = SubResource( 105 )
 wait_time = 20.0
 one_shot = true
 
-[node name="HealthBar" parent="." instance=ExtResource( 15 )]
-visible = true
-margin_left = -234.0
-margin_top = -134.0
-margin_right = -234.0
-margin_bottom = -134.0
-rect_scale = Vector2( 0.2, 0.2 )
+[node name="HealthBar_player" parent="." instance=ExtResource( 15 )]
 
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]

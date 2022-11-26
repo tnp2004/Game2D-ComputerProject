@@ -8,7 +8,7 @@
 [ext_resource path="res://Enemies-Sprite/Crab/Crab_AttackA.png" type="Texture" id=6]
 [ext_resource path="res://Enemies-Sprite/Crab/Crab_Hit.png" type="Texture" id=7]
 [ext_resource path="res://Enemies-Sprite/Crab/Crab_Death.png" type="Texture" id=8]
-[ext_resource path="res://UI/HealthBar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://UI/HealthBar_monsters.tscn" type="PackedScene" id=10]
 
 [sub_resource type="AtlasTexture" id=61]
 atlas = ExtResource( 6 )
