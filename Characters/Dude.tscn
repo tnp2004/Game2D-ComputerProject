@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Attack1_4.png" type="Texture" id=1]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Death_8.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Characters/Dude.gd" type="Script" id=10]
 [ext_resource path="res://Characters/Dude_FSM.gd" type="Script" id=11]
+[ext_resource path="res://Characters/Camera2D.gd" type="Script" id=12]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=13]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=14]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Hurt_4.png" type="Texture" id=15]
@@ -651,12 +652,6 @@ animation = "idle"
 position = Vector2( -1.5, 3.5 )
 shape = SubResource( 139 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 102, -43 )
-current = true
-smoothing_enabled = true
-smoothing_speed = 25.0
-
 [node name="currentState" type="Label" parent="."]
 margin_left = -18.0
 margin_top = -21.0
@@ -675,6 +670,26 @@ position = Vector2( 17.5, 0 )
 wait_time = 10.0
 one_shot = true
 
-[node name="HealthBar_player" parent="." instance=ExtResource( 9 )]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -63.5 )
+current = true
+limit_bottom = 100
+smoothing_enabled = true
+script = ExtResource( 12 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar_player" parent="CanvasLayer" instance=ExtResource( 9 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = 2.0
+margin_right = 1277.0
+margin_bottom = 724.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

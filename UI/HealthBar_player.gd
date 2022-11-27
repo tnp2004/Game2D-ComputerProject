@@ -4,7 +4,7 @@ var max_health = 0
 var current_health = 0
 
 func _ready():
-	max_health = get_parent().max_health
+	max_health = get_parent().get_parent().max_health
 	current_health = max_health
 	$ProgressBar.max_value = max_health
 	$ProgressBar.value = max_health

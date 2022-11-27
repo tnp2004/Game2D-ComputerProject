@@ -1,4 +1,20 @@
 extends Control
 
-func _on_PlayButton_pressed():
-	get_tree().change_scene("res://Stages/World.tscn")
+
+func _on_Start_pressed():
+	get_tree().change_scene("res://Stages/Stage_1.tscn")
+
+func _on_Shop_pressed():
+	pass # Replace with function body.
+
+
+func _on_Info_pressed():
+	pass # Replace with function body.
+
+
+func _on_Help_pressed():
+	pass # Replace with function body.
+
+
+func _on_Quit_pressed():
+	pass # Replace with function body.

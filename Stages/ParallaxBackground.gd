@@ -1,0 +1,3 @@
+extends ParallaxBackground
+
+pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Characters/Pink_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pink.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Jump_8.png" type="Texture" id=4]
 [ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Throw_4.png" type="Texture" id=6]
+[ext_resource path="res://Characters/Camera2D.gd" type="Script" id=7]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Walk+Attack_6.png" type="Texture" id=8]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Death_8.png" type="Texture" id=9]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Hurt_4.png" type="Texture" id=10]
@@ -703,12 +704,6 @@ animation = "idle"
 position = Vector2( -1.5, 3.5 )
 shape = SubResource( 139 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 102, -43 )
-current = true
-smoothing_enabled = true
-smoothing_speed = 25.0
-
 [node name="currentState" type="Label" parent="."]
 margin_left = -18.0
 margin_top = -21.0
@@ -748,7 +743,27 @@ cast_to = Vector2( 50, 0 )
 wait_time = 0.5
 one_shot = true
 
-[node name="HealthBar_player" parent="." instance=ExtResource( 5 )]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -63.5 )
+current = true
+limit_bottom = 100
+smoothing_enabled = true
+script = ExtResource( 7 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar_player" parent="CanvasLayer" instance=ExtResource( 5 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -2.0
+margin_top = 2.0
+margin_right = 1277.0
+margin_bottom = 724.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
 
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]

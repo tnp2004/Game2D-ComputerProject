@@ -70,7 +70,7 @@ func decrease_health(damage, enemy_direction):
 	spawn_damageIndicator(damage)
 	screen_shaker()
 	knockback(enemy_direction)
-	$HealthBar_player._on_health_updated(health)
+	$CanvasLayer/HealthBar_player._on_health_updated(health)
 	FSM.set_state(FSM.states.hurt)
 	if health <= 0:
 		dead()
