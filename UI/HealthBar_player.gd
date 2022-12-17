@@ -29,3 +29,6 @@ func get_player_node():
 	for i in get_tree().current_scene.get_children():
 		if i.is_in_group("player"):
 			return i # player node
+
+func coinUpdate(coinTotal):
+	$coinCounter.text = str(coinTotal)

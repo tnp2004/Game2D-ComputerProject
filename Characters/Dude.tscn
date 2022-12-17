@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Attack1_4.png" type="Texture" id=1]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Death_8.png" type="Texture" id=2]
@@ -623,6 +623,9 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 13 )
 
+[sub_resource type="RectangleShape2D" id=178]
+extents = Vector2( 10.5, 12.5 )
+
 [node name="Dude" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
 script = ExtResource( 10 )
@@ -692,4 +695,11 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="ItemCollecter" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollecter"]
+position = Vector2( -1.5, 3.5 )
+shape = SubResource( 178 )
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="area_entered" from="ItemCollecter" to="." method="_on_ItemCollecter_area_entered"]

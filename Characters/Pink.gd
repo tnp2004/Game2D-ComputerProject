@@ -7,6 +7,7 @@ const TORNADO = preload("res://Skills/Pink/Tornado.tscn") #skill 2
 const EARTHSPIKE = preload("res://Skills/Pink/EarthSpike.tscn") #skill 3
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
+var coin = 0
 export(int) var max_health = 200
 var health = max_health
 var isDead = false
@@ -177,3 +178,8 @@ func _on_WaterballStopTimer_timeout():
 
 func _on_attackCD_timeout():
 	attack_cooldown = false
+
+func _on_ItemCollecter_area_entered(area):
+	if area.is_in_group("coin"):
+		coin += 5
+		$CanvasLayer/HealthBar_player.coinUpdate(coin)

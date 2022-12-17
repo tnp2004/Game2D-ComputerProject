@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=79 format=2]
 
 [ext_resource path="res://Characters/Pink_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pink.gd" type="Script" id=2]
@@ -673,6 +673,9 @@ font_data = ExtResource( 15 )
 [sub_resource type="RectangleShape2D" id=141]
 extents = Vector2( 9.5, 10 )
 
+[sub_resource type="RectangleShape2D" id=187]
+extents = Vector2( 10.5, 12.5 )
+
 [node name="Pink" type="KinematicBody2D" groups=["player"]]
 scale = Vector2( 2, 2 )
 collision_layer = 2
@@ -765,8 +768,15 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="ItemCollecter" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollecter"]
+position = Vector2( -1.5, 3.5 )
+shape = SubResource( 187 )
+
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
 [connection signal="timeout" from="WaterballTimer2" to="." method="_on_WaterballTimer_timeout"]
 [connection signal="timeout" from="WaterballTimer3" to="." method="_on_WaterballStopTimer_timeout"]
 [connection signal="timeout" from="attackCD" to="." method="_on_attackCD_timeout"]
+[connection signal="area_entered" from="ItemCollecter" to="." method="_on_ItemCollecter_area_entered"]

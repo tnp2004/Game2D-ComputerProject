@@ -16,6 +16,7 @@ export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
 var mouse_pos
+var coin = 0
 
 onready var FSM = get_node("Dude_FSM")
 
@@ -183,3 +184,8 @@ func selfimprove():
 
 func _on_Timer_timeout():
 	improve_skill = 0
+
+func _on_ItemCollecter_area_entered(area):
+	if area.is_in_group("coin"):
+		coin += 5
+		$CanvasLayer/HealthBar_player.coinUpdate(coin)

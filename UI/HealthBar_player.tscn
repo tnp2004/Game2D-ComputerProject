@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://UI/HealthBar_player.gd" type="Script" id=1]
 [ext_resource path="res://UI-Sprite/border_health.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://charactersIcon/Owlet.png" type="Texture" id=4]
+[ext_resource path="res://UI-Sprite/coin2.png" type="Texture" id=5]
 
 [sub_resource type="Theme" id=4]
 
@@ -36,6 +37,14 @@ bg_color = Color( 0.6, 0.6, 0.6, 0 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 10
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 12
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
@@ -104,3 +113,19 @@ margin_right = 42.3333
 margin_bottom = 34.6667
 rect_scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 4 )
+
+[node name="Coin" type="TextureRect" parent="."]
+margin_left = 763.333
+margin_top = 18.667
+margin_right = 783.333
+margin_bottom = 38.667
+texture = ExtResource( 5 )
+
+[node name="coinCounter" type="Label" parent="."]
+margin_left = 788.667
+margin_top = 23.3333
+margin_right = 816.667
+margin_bottom = 38.3333
+custom_colors/font_color = Color( 0.996078, 0.682353, 0.203922, 1 )
+custom_fonts/font = SubResource( 10 )
+text = "123"

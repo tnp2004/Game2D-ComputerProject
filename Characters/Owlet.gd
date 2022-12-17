@@ -16,6 +16,8 @@ export(int) var GRAVITY = 1400
 
 onready var FSM = get_node("Owlet_FSM")
 
+var coin = 0
+
 var FRICTION = 0.5
 var velocity = Vector2.ZERO
 
@@ -176,3 +178,8 @@ func stop_transform_skill():
 
 func _on_TransformTimer_timeout():
 	stop_transform_skill()
+
+func _on_ItemCollecter_area_entered(area):
+	if area.is_in_group("coin"):
+		coin += 5
+		$CanvasLayer/HealthBar_player.coinUpdate(coin)

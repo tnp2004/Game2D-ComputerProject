@@ -1,4 +1,4 @@
-[gd_scene load_steps=143 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Idle_4.png" type="Texture" id=1]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=2]
@@ -985,6 +985,9 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 ]
 }
 
+[sub_resource type="RectangleShape2D" id=127]
+extents = Vector2( 10.5, 12.5 )
+
 [node name="Owlet" type="KinematicBody2D" groups=["player"]]
 position = Vector2( 638, 489 )
 scale = Vector2( 2, 2 )
@@ -1053,7 +1056,7 @@ one_shot = true
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -63.5 )
 current = true
-limit_bottom = 100
+limit_bottom = 300
 smoothing_enabled = true
 script = ExtResource( 16 )
 
@@ -1072,5 +1075,12 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="ItemCollecter" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ItemCollecter"]
+position = Vector2( -1.5, 3.5 )
+shape = SubResource( 127 )
+
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
+[connection signal="area_entered" from="ItemCollecter" to="." method="_on_ItemCollecter_area_entered"]
