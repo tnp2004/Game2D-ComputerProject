@@ -1,19 +1,15 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=78 format=2]
 
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Attack1_4.png" type="Texture" id=1]
+[ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Walk+Attack_6.png" type="Texture" id=1]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Death_8.png" type="Texture" id=2]
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Attack2_6.png" type="Texture" id=3]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Jump_8.png" type="Texture" id=4]
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Walk+Attack_6.png" type="Texture" id=5]
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Hurt_4.png" type="Texture" id=6]
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Push_6.png" type="Texture" id=7]
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Jump_8.png" type="Texture" id=8]
+[ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Attack2_6.png" type="Texture" id=5]
+[ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Throw_4.png" type="Texture" id=6]
 [ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Characters/Dude.gd" type="Script" id=10]
 [ext_resource path="res://Characters/Dude_FSM.gd" type="Script" id=11]
-[ext_resource path="res://Characters/Camera2D.gd" type="Script" id=12]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=13]
-[ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Run_6.png" type="Texture" id=14]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Hurt_4.png" type="Texture" id=15]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Idle_4.png" type="Texture" id=16]
 [ext_resource path="res://Characters-Sprite/3 Dude_Monster/Dude_Monster_Run_6.png" type="Texture" id=17]
@@ -47,7 +43,8 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=127]
 resource_name = "attack_1"
-length = 0.5
+length = 0.2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite:animation")
 tracks/0/interp = 1
@@ -67,10 +64,10 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0 ]
+"values": [ 0, 1, 2, 3 ]
 }
 
 [sub_resource type="Animation" id=128]
@@ -369,9 +366,21 @@ tracks/1/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 1 )
+[sub_resource type="AtlasTexture" id=189]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=190]
+atlas = ExtResource( 6 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=191]
+atlas = ExtResource( 6 )
 region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=192]
+atlas = ExtResource( 6 )
+region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=24]
 atlas = ExtResource( 3 )
@@ -381,8 +390,8 @@ region = Rect2( 128, 0, 32, 32 )
 atlas = ExtResource( 3 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 5 )
+[sub_resource type="AtlasTexture" id=180]
+atlas = ExtResource( 1 )
 region = Rect2( 32, 0, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=153]
@@ -517,41 +526,41 @@ region = Rect2( 128, 0, 32, 32 )
 atlas = ExtResource( 17 )
 region = Rect2( 160, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=46]
-atlas = ExtResource( 14 )
+[sub_resource type="AtlasTexture" id=185]
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=186]
+atlas = ExtResource( 5 )
 region = Rect2( 128, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=47]
-atlas = ExtResource( 14 )
-region = Rect2( 160, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 7 )
+[sub_resource type="AtlasTexture" id=187]
+atlas = ExtResource( 6 )
 region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 7 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=106]
-atlas = ExtResource( 3 )
-region = Rect2( 32, 0, 32, 32 )
-
-[sub_resource type="AtlasTexture" id=107]
+[sub_resource type="AtlasTexture" id=188]
 atlas = ExtResource( 6 )
 region = Rect2( 32, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=108]
-atlas = ExtResource( 8 )
-region = Rect2( 128, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id=181]
+atlas = ExtResource( 15 )
+region = Rect2( 0, 0, 32, 32 )
 
-[sub_resource type="AtlasTexture" id=109]
-atlas = ExtResource( 8 )
-region = Rect2( 160, 0, 32, 32 )
+[sub_resource type="AtlasTexture" id=182]
+atlas = ExtResource( 15 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=183]
+atlas = ExtResource( 15 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=184]
+atlas = ExtResource( 15 )
+region = Rect2( 96, 0, 32, 32 )
 
 [sub_resource type="SpriteFrames" id=138]
 animations = [ {
-"frames": [ SubResource( 18 ) ],
+"frames": [ SubResource( 189 ), SubResource( 190 ), SubResource( 191 ), SubResource( 192 ) ],
 "loop": true,
 "name": "attack_1",
 "speed": 5.0
@@ -561,7 +570,7 @@ animations = [ {
 "name": "attack_2",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 40 ) ],
+"frames": [ SubResource( 180 ) ],
 "loop": true,
 "name": "attack_run",
 "speed": 5.0
@@ -596,17 +605,17 @@ animations = [ {
 "name": "run",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 46 ), SubResource( 47 ) ],
+"frames": [ SubResource( 185 ), SubResource( 186 ) ],
 "loop": true,
 "name": "skill_1",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 43 ), SubResource( 44 ) ],
+"frames": [ SubResource( 187 ), SubResource( 188 ) ],
 "loop": true,
 "name": "skill_2",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 106 ), SubResource( 107 ), SubResource( 108 ), SubResource( 109 ) ],
+"frames": [ SubResource( 181 ), SubResource( 182 ), SubResource( 183 ), SubResource( 184 ) ],
 "loop": true,
 "name": "skill_3",
 "speed": 5.0
@@ -676,9 +685,8 @@ one_shot = true
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -63.5 )
 current = true
-limit_bottom = 100
+limit_bottom = 300
 smoothing_enabled = true
-script = ExtResource( 12 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -701,5 +709,8 @@ __meta__ = {
 position = Vector2( -1.5, 3.5 )
 shape = SubResource( 178 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="ItemCollecter" to="." method="_on_ItemCollecter_area_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

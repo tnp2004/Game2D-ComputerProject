@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coin2_20x20.png-4ee670a2778e79c693da0b645d5afd74.stex"
+path="res://.import/char_selecter.png-a3eed941afa6e949f6fd9f9b76771338.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/coin2_20x20.png"
-dest_files=[ "res://.import/coin2_20x20.png-4ee670a2778e79c693da0b645d5afd74.stex" ]
+source_file="res://UI-Sprite/char_selecter.png"
+dest_files=[ "res://.import/char_selecter.png-a3eed941afa6e949f6fd9f9b76771338.stex" ]
 
 [params]
 

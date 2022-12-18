@@ -1,8 +1,8 @@
 extends Control
 
-
+# warning-ignore:return_value_discarded
 func _on_Start_pressed():
-	get_tree().change_scene("res://Stages/Stage_1.tscn")
+	get_tree().change_scene("res://UI/Mapselecter.tscn")
 
 func _on_Shop_pressed():
 	pass # Replace with function body.

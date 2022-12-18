@@ -183,3 +183,8 @@ func _on_ItemCollecter_area_entered(area):
 	if area.is_in_group("coin"):
 		coin += 5
 		$CanvasLayer/HealthBar_player.coinUpdate(coin)
+
+
+func _on_VisibilityNotifier2D_screen_exited():
+	print("exit screen")
+	get_tree().change_scene("res://UI/Mainmenu.tscn")

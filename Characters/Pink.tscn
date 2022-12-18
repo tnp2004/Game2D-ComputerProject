@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=2]
+[gd_scene load_steps=78 format=2]
 
 [ext_resource path="res://Characters/Pink_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pink.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Jump_8.png" type="Texture" id=4]
 [ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Throw_4.png" type="Texture" id=6]
-[ext_resource path="res://Characters/Camera2D.gd" type="Script" id=7]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Walk+Attack_6.png" type="Texture" id=8]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Death_8.png" type="Texture" id=9]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Hurt_4.png" type="Texture" id=10]
@@ -749,9 +748,8 @@ one_shot = true
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 0, -63.5 )
 current = true
-limit_bottom = 100
+limit_bottom = 300
 smoothing_enabled = true
-script = ExtResource( 7 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -774,9 +772,12 @@ __meta__ = {
 position = Vector2( -1.5, 3.5 )
 shape = SubResource( 187 )
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
 [connection signal="timeout" from="WaterballTimer2" to="." method="_on_WaterballTimer_timeout"]
 [connection signal="timeout" from="WaterballTimer3" to="." method="_on_WaterballStopTimer_timeout"]
 [connection signal="timeout" from="attackCD" to="." method="_on_attackCD_timeout"]
 [connection signal="area_entered" from="ItemCollecter" to="." method="_on_ItemCollecter_area_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

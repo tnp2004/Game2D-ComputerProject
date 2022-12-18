@@ -82,21 +82,9 @@ func decrease_health(damage, enemy_direction):
 		dead()
 		
 # attack
-var attack_stage = 1
-var time = 0
-func attack_combo(delta):
-	time += delta # This is stopwatch
-	if Input.is_action_just_pressed("left_click") and attack_stage == 1:
+func attack():
+	if Input.is_action_just_pressed("left_click"):
 		FSM.set_state(FSM.states.attack_1)
-		attack_stage = 2
-		
-	elif Input.is_action_just_pressed("left_click") and attack_stage == 2:
-		FSM.set_state(FSM.states.attack_2)
-		attack_stage = 1
-	
-	if time > 1:
-		attack_stage = 1
-		time = 0
 
 func attack_and_run():
 	if Input.is_action_just_pressed("left_click"):
@@ -153,7 +141,7 @@ func normal_attack():
 
 func useExplosion():
 	if Input.is_action_just_pressed("skill_1"):
-		FSM.set_state(FSM.states.skill_2)
+		FSM.set_state(FSM.states.skill_1)
 		explosion()
 		
 func explosion():
@@ -189,3 +177,7 @@ func _on_ItemCollecter_area_entered(area):
 	if area.is_in_group("coin"):
 		coin += 5
 		$CanvasLayer/HealthBar_player.coinUpdate(coin)
+
+func _on_VisibilityNotifier2D_screen_exited():
+	print("exit screen")
+	get_tree().change_scene("res://UI/Mainmenu.tscn")

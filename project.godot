@@ -21,7 +21,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Game 2d- Computer Project"
-run/main_scene="res://Stages/Stage_1.tscn"
+run/main_scene="res://UI/Mainmenu.tscn"
 config/icon="res://gameicon.png"
 
 [display]

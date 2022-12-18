@@ -25,7 +25,7 @@ func _state_logic(_delta: float) -> void:
 		parent.useNormal_Attack()
 		parent.walk_logic()
 		if parent.velocity.length() == 0:
-			parent.attack_combo(_delta)
+			parent.attack()
 		else:
 			parent.attack_and_run()
 
