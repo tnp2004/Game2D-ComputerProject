@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://UI-Sprite/eventMenu.png" type="Texture" id=1]
+[ext_resource path="res://UI-Sprite/coin2.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/fontsetting.tres" type="DynamicFont" id=3]
+[ext_resource path="res://UI-Sprite/Button/nextButton.png" type="Texture" id=4]
+[ext_resource path="res://UI-Sprite/Button/hovernextButton.png" type="Texture" id=5]
+[ext_resource path="res://UI-Sprite/Button/hoverrepeatButton.png" type="Texture" id=6]
+[ext_resource path="res://UI-Sprite/Button/repeatButton.png" type="Texture" id=7]
+[ext_resource path="res://UI-Sprite/Button/homeButton.png" type="Texture" id=8]
+[ext_resource path="res://UI-Sprite/Button/hoverhomeButton.png" type="Texture" id=9]
+
+[node name="PassMenu" type="Control"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 1, 1, 1, 0.376471 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -260.0
+margin_right = 250.0
+margin_bottom = 260.0
+texture = ExtResource( 1 )
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -251.0
+margin_top = -259.0
+margin_right = 248.0
+margin_bottom = 259.0
+custom_constants/separation = 150
+alignment = 1
+
+[node name="Status" type="Label" parent="VBoxContainer"]
+margin_top = 34.0
+margin_right = 499.0
+margin_bottom = 64.0
+custom_fonts/font = ExtResource( 3 )
+text = "Congratulation"
+align = 1
+valign = 1
+
+[node name="CoinBox" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 214.0
+margin_right = 499.0
+margin_bottom = 254.0
+alignment = 1
+
+[node name="Coin" type="TextureRect" parent="VBoxContainer/CoinBox"]
+margin_left = 174.0
+margin_right = 214.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="Amount2" type="Label" parent="VBoxContainer/CoinBox"]
+margin_left = 218.0
+margin_top = 5.0
+margin_right = 249.0
+margin_bottom = 35.0
+custom_colors/font_color = Color( 0.996078, 0.682353, 0.203922, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = " x"
+align = 1
+
+[node name="Amount" type="Label" parent="VBoxContainer/CoinBox"]
+margin_left = 253.0
+margin_top = 5.0
+margin_right = 324.0
+margin_bottom = 35.0
+custom_colors/font_color = Color( 0.996078, 0.682353, 0.203922, 1 )
+custom_fonts/font = ExtResource( 3 )
+text = " 123"
+align = 1
+
+[node name="Button" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 404.0
+margin_right = 499.0
+margin_bottom = 484.0
+custom_constants/separation = 30
+alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="VBoxContainer/Button"]
+margin_left = 99.0
+margin_right = 179.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+
+[node name="TextureButton2" type="TextureButton" parent="VBoxContainer/Button"]
+margin_left = 209.0
+margin_right = 289.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 7 )
+texture_hover = ExtResource( 6 )
+
+[node name="TextureButton3" type="TextureButton" parent="VBoxContainer/Button"]
+margin_left = 319.0
+margin_right = 399.0
+margin_bottom = 80.0
+texture_normal = ExtResource( 8 )
+texture_hover = ExtResource( 9 )

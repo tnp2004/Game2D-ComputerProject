@@ -186,5 +186,8 @@ func _on_ItemCollecter_area_entered(area):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
+	isDead = true
+	health -= health
+	$CanvasLayer/HealthBar_player._on_health_updated(health)
 	print("exit screen")
-	get_tree().change_scene("res://UI/Mainmenu.tscn")
+	$CanvasLayer/PassMenu.visible = true

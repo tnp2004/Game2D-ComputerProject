@@ -10,10 +10,10 @@
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.701961, 0.223529, 0.14902, 1 )
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.701961, 0.223529, 0.14902, 0 )
@@ -26,10 +26,10 @@ corner_radius_bottom_left = 6
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.92549, 0.454902, 0.298039, 1 )
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
 anti_aliasing_size = 0.522
 
 [sub_resource type="StyleBoxFlat" id=7]
@@ -72,10 +72,10 @@ rect_scale = Vector2( 0.18, 0.21 )
 texture = ExtResource( 2 )
 
 [node name="ProgressBar2" type="ProgressBar" parent="."]
-margin_left = 59.3333
-margin_top = 21.6667
-margin_right = 165.333
-margin_bottom = 40.6667
+margin_left = 58.0
+margin_top = 22.0
+margin_right = 167.0
+margin_bottom = 41.0
 theme = SubResource( 4 )
 custom_styles/fg = SubResource( 8 )
 custom_styles/bg = SubResource( 6 )
@@ -83,10 +83,10 @@ value = 100.0
 percent_visible = false
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-margin_left = 59.3333
-margin_top = 21.6667
-margin_right = 165.333
-margin_bottom = 38.6667
+margin_left = 58.0
+margin_top = 22.0
+margin_right = 167.0
+margin_bottom = 39.0
 theme = SubResource( 1 )
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 7 )
@@ -128,4 +128,4 @@ margin_right = 816.667
 margin_bottom = 38.3333
 custom_colors/font_color = Color( 0.996078, 0.682353, 0.203922, 1 )
 custom_fonts/font = SubResource( 10 )
-text = "123"
+text = "0"

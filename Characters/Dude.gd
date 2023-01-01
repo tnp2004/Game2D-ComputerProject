@@ -178,6 +178,7 @@ func _on_ItemCollecter_area_entered(area):
 		coin += 5
 		$CanvasLayer/HealthBar_player.coinUpdate(coin)
 
+# when player exited screen will do something
 func _on_VisibilityNotifier2D_screen_exited():
 	print("exit screen")
 	get_tree().change_scene("res://UI/Mainmenu.tscn")

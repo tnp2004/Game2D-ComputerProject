@@ -1,0 +1,203 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://UI-Sprite/Button_hover.png" type="Texture" id=1]
+[ext_resource path="res://UI-Sprite/Button_normal.png" type="Texture" id=2]
+[ext_resource path="res://UI/HelpMenu.gd" type="Script" id=3]
+[ext_resource path="res://UI-Sprite/map-bg-menu.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/fontsetting.tres" type="DynamicFont" id=5]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/D.png" type="Texture" id=6]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/A.png" type="Texture" id=7]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/3.png" type="Texture" id=8]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/SPACE.png" type="Texture" id=9]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/2.png" type="Texture" id=10]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/1.png" type="Texture" id=11]
+[ext_resource path="res://UI-Sprite/Button/LeftClickButton.png" type="Texture" id=12]
+[ext_resource path="res://UI-Sprite/Button/Dark-Classic/Single PNGs/7.png" type="Texture" id=13]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/ARROWLEFT.png" type="Texture" id=14]
+[ext_resource path="res://UI-Sprite/Button/Dark-Classic/Single PNGs/9.png" type="Texture" id=15]
+[ext_resource path="res://UI-Sprite/Button/Dark-Jumbo/Single PNGs/ARROWRIGHT.png" type="Texture" id=16]
+[ext_resource path="res://UI-Sprite/Button/Dark-Classic/Single PNGs/8.png" type="Texture" id=17]
+
+[sub_resource type="StyleBoxFlat" id=1]
+draw_center = false
+
+[node name="HelpMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+
+[node name="Backbutton" type="TextureButton" parent="."]
+margin_left = 30.0
+margin_top = 30.0
+margin_right = 150.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 2 )
+texture_hover = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="Backbutton"]
+margin_right = 150.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 1 )
+text = "BACK"
+align = 1
+valign = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -376.5
+margin_top = -166.5
+margin_right = 376.5
+margin_bottom = 292.5
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 753.0
+margin_bottom = 459.0
+custom_fonts/font = ExtResource( 5 )
+text = "D or     Arrow right  = Move forward
+
+A or     Arrow Left  = Move backward
+
+Spacebar = Jump
+
+Left Click = Normal attack
+
+1 (numeric key) or     7 (numpad) = skill 1
+
+2 numeric key) or     8 (numpad) = skill 2
+
+3 (numeric key) or     9 (numpad) = skill 3
+"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -486.0
+margin_top = -174.0
+margin_right = -388.0
+margin_bottom = 264.0
+custom_constants/separation = 24
+
+[node name="Forwardbutton" type="TextureRect" parent="VBoxContainer2"]
+margin_right = 98.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 6 )
+stretch_mode = 6
+
+[node name="Backwardbutton" type="TextureRect" parent="VBoxContainer2"]
+margin_top = 66.0
+margin_right = 98.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 7 )
+stretch_mode = 6
+
+[node name="Jumpbutton" type="TextureRect" parent="VBoxContainer2"]
+margin_top = 132.0
+margin_right = 98.0
+margin_bottom = 174.0
+rect_min_size = Vector2( 50, 42 )
+texture = ExtResource( 9 )
+stretch_mode = 6
+
+[node name="Normalattackbutton" type="TextureRect" parent="VBoxContainer2"]
+margin_top = 198.0
+margin_right = 98.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 12 )
+stretch_mode = 6
+
+[node name="Skill1button" type="TextureRect" parent="VBoxContainer2"]
+margin_top = 264.0
+margin_right = 98.0
+margin_bottom = 306.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 11 )
+stretch_mode = 6
+
+[node name="Skill2button" type="TextureRect" parent="VBoxContainer2"]
+margin_top = 330.0
+margin_right = 98.0
+margin_bottom = 372.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 10 )
+stretch_mode = 6
+
+[node name="Skill3button" type="TextureRect" parent="VBoxContainer2"]
+margin_top = 396.0
+margin_right = 98.0
+margin_bottom = 438.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 8 )
+stretch_mode = 6
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = 336.0
+margin_top = 186.0
+margin_right = 416.0
+margin_bottom = 228.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 16 )
+stretch_mode = 6
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = 336.0
+margin_top = 255.0
+margin_right = 416.0
+margin_bottom = 297.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 14 )
+stretch_mode = 6
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+margin_left = 583.0
+margin_top = 450.0
+margin_right = 663.0
+margin_bottom = 492.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 13 )
+stretch_mode = 6
+
+[node name="TextureRect5" type="TextureRect" parent="."]
+margin_left = 578.0
+margin_top = 516.0
+margin_right = 658.0
+margin_bottom = 558.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 17 )
+stretch_mode = 6
+
+[node name="TextureRect6" type="TextureRect" parent="."]
+margin_left = 588.0
+margin_top = 583.0
+margin_right = 668.0
+margin_bottom = 625.0
+rect_min_size = Vector2( 80, 42 )
+texture = ExtResource( 15 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -291.5
+margin_top = 67.0
+margin_right = 1.5
+margin_bottom = 97.0
+rect_scale = Vector2( 2, 2 )
+custom_colors/font_color = Color( 0.117647, 0.737255, 0.45098, 1 )
+custom_fonts/font = ExtResource( 5 )
+text = "Control button"
+
+[connection signal="pressed" from="Backbutton" to="." method="_on_Backbutton_pressed"]
