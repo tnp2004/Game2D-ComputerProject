@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://Characters/Pink_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pink.gd" type="Script" id=2]
@@ -6,11 +6,13 @@
 [ext_resource path="res://Characters-Sprite/2 Owlet_Monster/Owlet_Monster_Jump_8.png" type="Texture" id=4]
 [ext_resource path="res://UI/HealthBar_player.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Throw_4.png" type="Texture" id=6]
+[ext_resource path="res://UI/PassMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Walk+Attack_6.png" type="Texture" id=8]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Death_8.png" type="Texture" id=9]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Hurt_4.png" type="Texture" id=10]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Idle_4.png" type="Texture" id=11]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Push_6.png" type="Texture" id=12]
+[ext_resource path="res://UI/LoseMenu.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Fonts/Kaph-Regular.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Attack1_4.png" type="Texture" id=16]
 [ext_resource path="res://Characters-Sprite/1 Pink_Monster/Pink_Monster_Jump_8.png" type="Texture" id=17]
@@ -201,20 +203,6 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.8 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [  ],
-"method": "queue_free"
-} ]
 }
 
 [sub_resource type="Animation" id=131]
@@ -752,6 +740,7 @@ limit_bottom = 300
 smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
 
 [node name="HealthBar_player" parent="CanvasLayer" instance=ExtResource( 5 )]
 anchor_left = 0.0
@@ -765,6 +754,12 @@ margin_bottom = 724.0
 __meta__ = {
 "_edit_use_anchors_": true
 }
+
+[node name="PassMenu" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+
+[node name="LoseMenu" parent="CanvasLayer" instance=ExtResource( 13 )]
+visible = false
 
 [node name="ItemCollecter" type="Area2D" parent="."]
 

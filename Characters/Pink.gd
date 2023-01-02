@@ -8,7 +8,7 @@ const EARTHSPIKE = preload("res://Skills/Pink/EarthSpike.tscn") #skill 3
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
 var coin = 0
-export(int) var max_health = 200
+export(int) var max_health = 10
 var health = max_health
 var isDead = false
 export(int) var WALKSPEED = 300
@@ -29,24 +29,27 @@ var earth_spike_cast_to = 50
 var earth_spike_pos = 29
 var attack_cooldown = false
 
+var isFinish = false
+
 func get_input_direction():
-	var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	velocity.x = direction * WALKSPEED
+	if !isFinish:
+		var direction = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		velocity.x = direction * WALKSPEED
 	
-	if Input.is_action_pressed("ui_up") and is_on_floor():
-		velocity.y = - JUMPFORCE
+		if Input.is_action_pressed("ui_up") and is_on_floor():
+			velocity.y = - JUMPFORCE
 	
-	if direction < 0:
-		$AnimatedSprite.flip_h = true # flip character
-		$attackArea.position.x = -42 # set position of attackArea
-		$canEarthspike.cast_to.x = - earth_spike_cast_to
-		$canEarthspike.position.x = - earth_spike_pos
+		if direction < 0:
+			$AnimatedSprite.flip_h = true # flip character
+			$attackArea.position.x = -42 # set position of attackArea
+			$canEarthspike.cast_to.x = - earth_spike_cast_to
+			$canEarthspike.position.x = - earth_spike_pos
 		
-	if direction > 0:
-		$AnimatedSprite.flip_h = false # flip character
-		$attackArea.position.x = 0 # set position of attackArea
-		$canEarthspike.cast_to.x = earth_spike_cast_to
-		$canEarthspike.position.x = earth_spike_pos
+		if direction > 0:
+			$AnimatedSprite.flip_h = false # flip character
+			$attackArea.position.x = 0 # set position of attackArea
+			$canEarthspike.cast_to.x = earth_spike_cast_to
+			$canEarthspike.position.x = earth_spike_pos
 
 var knockback_force = 3000
 var knockup_force = - 400
@@ -65,6 +68,10 @@ func screen_shaker():
 func dead():
 	isDead = true
 	FSM.set_state(FSM.states.dead)
+	self.remove_from_group("player")
+	velocity = Vector2.ZERO
+	$CanvasLayer/HealthBar_player._on_health_updated(health)
+	$CanvasLayer/LoseMenu.visible = true
 
 func decrease_health(damage, enemy_direction):
 	health -= damage
@@ -184,7 +191,13 @@ func _on_ItemCollecter_area_entered(area):
 		coin += 5
 		$CanvasLayer/HealthBar_player.coinUpdate(coin)
 
-
 func _on_VisibilityNotifier2D_screen_exited():
-	print("exit screen")
-	get_tree().change_scene("res://UI/Mainmenu.tscn")
+	isDead = true
+	health -= health
+	$CanvasLayer/HealthBar_player._on_health_updated(health)
+	$CanvasLayer/LoseMenu.visible = true
+
+func passStage():
+	$CanvasLayer/PassMenu.visible = true
+	isFinish = true
+	velocity = Vector2.ZERO

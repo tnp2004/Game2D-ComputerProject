@@ -89,9 +89,10 @@ func isFlip():
 		$Walldetecter.cast_to.x = 50
 
 func chase_player():
-	var to_player = (get_player_node().position - position).normalized()
-	velocity.x = to_player.x * SPEED * FRICTION
-	velocity = move_and_slide(velocity, Vector2.UP)
+	if get_player_node():
+		var to_player = (get_player_node().position - position).normalized()
+		velocity.x = to_player.x * SPEED * FRICTION
+		velocity = move_and_slide(velocity, Vector2.UP)
 
 func _physics_process(delta):
 	velocity.y += GRAVITY * delta

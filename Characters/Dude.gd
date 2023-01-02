@@ -9,7 +9,7 @@ const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 const EXPLOSION = preload("res://Skills/Dude/Explosion.tscn") #Explosion skill
 const SPIKEBALL = preload("res://Skills/Dude/SpikeBall.tscn") #Spikeball skill
 
-export(int) var max_health = 200
+export(int) var max_health = 10
 var health = max_health
 var isDead = false
 export(int) var WALKSPEED = 300
@@ -17,6 +17,8 @@ export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
 var mouse_pos
 var coin = 0
+
+var isFinish = false
 
 onready var FSM = get_node("Dude_FSM")
 
@@ -33,17 +35,18 @@ var normal_range = 5
 var improve_skill = 0
 
 func get_input_direction():
-	walk_dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	velocity.x = walk_dir * WALKSPEED
+	if !isFinish:
+		walk_dir = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		velocity.x = walk_dir * WALKSPEED
 	
-	if Input.is_action_pressed("ui_up") and is_on_floor():
-		velocity.y = - JUMPFORCE
+		if Input.is_action_pressed("ui_up") and is_on_floor():
+			velocity.y = - JUMPFORCE
 	
-	if mouse_pos.x < 640:
-		$AnimatedSprite.flip_h = true # flip character
+		if mouse_pos.x < 640:
+			$AnimatedSprite.flip_h = true # flip character
 		
-	if mouse_pos.x > 640:
-		$AnimatedSprite.flip_h = false # flip character
+		if mouse_pos.x > 640:
+			$AnimatedSprite.flip_h = false # flip character
 
 func walk_logic():
 	if mouse_pos.x < 640 and walk_dir == 1:
@@ -70,6 +73,10 @@ func screen_shaker():
 func dead():
 	isDead = true
 	FSM.set_state(FSM.states.dead)
+	self.remove_from_group("player")
+	velocity = Vector2.ZERO
+	$CanvasLayer/HealthBar_player._on_health_updated(health)
+	$CanvasLayer/LoseMenu.visible = true
 
 func decrease_health(damage, enemy_direction):
 	health -= damage
@@ -180,5 +187,12 @@ func _on_ItemCollecter_area_entered(area):
 
 # when player exited screen will do something
 func _on_VisibilityNotifier2D_screen_exited():
-	print("exit screen")
-	get_tree().change_scene("res://UI/Mainmenu.tscn")
+	isDead = true
+	health -= health
+	$CanvasLayer/HealthBar_player._on_health_updated(health)
+	$CanvasLayer/LoseMenu.visible = true
+
+func passStage():
+	$CanvasLayer/PassMenu.visible = true
+	isFinish = true
+	velocity = Vector2.ZERO
