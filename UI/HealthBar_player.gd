@@ -13,6 +13,9 @@ func _ready():
 	$ProgressBar/Label.text = str(current_health) + "/" + str(max_health)
 	set_up_icon_char()
 
+func _process(delta):
+	$Name.text = str(Global.player_name)
+
 func set_up_icon_char():
 	if get_player_node():
 		var character = get_player_node().name

@@ -24,6 +24,10 @@ config/name="Game 2d- Computer Project"
 run/main_scene="res://UI/Mainmenu.tscn"
 config/icon="res://gameicon.png"
 
+[autoload]
+
+Global="*res://Global.gd"
+
 [display]
 
 window/size/width=1280
