@@ -77,7 +77,7 @@ Left Click = Normal attack
 
 3 (numeric key) or     9 (numpad) = skill 3
 
-ESC = pause the game
+ESC = pause and option
 "
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="."]

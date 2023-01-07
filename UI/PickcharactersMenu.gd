@@ -1,5 +1,8 @@
 extends Control
 
+func _ready():
+	self.visible = true
+
 func get_player_spawner_pos():
 	for i in get_tree().current_scene.get_children():
 		if i.name == "player_spawner":

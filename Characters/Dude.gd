@@ -184,6 +184,8 @@ func _on_ItemCollecter_area_entered(area):
 	if area.is_in_group("coin"):
 		coin += 5
 		$CanvasLayer/HealthBar_player.coinUpdate(coin)
+		$CanvasLayer/PassMenu/VBoxContainer/CoinBox/Amount.text = str(coin)
+		$CanvasLayer/LoseMenu/VBoxContainer/CoinBox/Amount.text = str(coin)
 
 # when player exited screen will do something
 func _on_VisibilityNotifier2D_screen_exited():
