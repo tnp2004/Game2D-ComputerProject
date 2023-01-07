@@ -1,6 +1,6 @@
 [gd_scene load_steps=61 format=2]
 
-[ext_resource path="res://Golem_FSM.gd" type="Script" id=1]
+[ext_resource path="res://Enemies/Golem_FSM.gd" type="Script" id=1]
 [ext_resource path="res://Enemies-Sprite/Golem No Armor/Golem_DeathB.png" type="Texture" id=2]
 [ext_resource path="res://Enemies-Sprite/Golem No Armor/Golem_Run.png" type="Texture" id=3]
 [ext_resource path="res://Enemies-Sprite/Golem No Armor/Golem_HitA.png" type="Texture" id=4]
