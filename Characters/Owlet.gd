@@ -6,7 +6,7 @@ const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
-export(int) var max_health = 10
+export(int) var max_health = 1000
 var health = max_health
 
 var isFinish = false

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enemies/RedBat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://UI/PauseMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://UI/PickcharactersMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/BlueCrab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Enemies/Golem.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Tileset/TileMap_1.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Stages/ParallaxBackground.gd" type="Script" id=9]
 [ext_resource path="res://Map-Sprites/Background/Green.png" type="Texture" id=10]
@@ -31,7 +32,7 @@ stretch_mode = 2
 flip_h = true
 
 [node name="player_spawner" type="Position2D" parent="."]
-position = Vector2( -47, -70 )
+position = Vector2( 1823, -163 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 3
@@ -46,4 +47,7 @@ visible = false
 position = Vector2( 1076, -71 )
 
 [node name="BlueCrab" parent="." instance=ExtResource( 4 )]
-position = Vector2( 173, -34 )
+position = Vector2( 300, -43 )
+
+[node name="Golem" parent="." instance=ExtResource( 5 )]
+position = Vector2( 1548, -143 )
