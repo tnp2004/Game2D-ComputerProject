@@ -64,17 +64,17 @@ margin_bottom = 254.0
 alignment = 1
 
 [node name="Coin" type="TextureRect" parent="VBoxContainer/CoinBox"]
-margin_left = 174.0
-margin_right = 214.0
+margin_left = 200.0
+margin_right = 240.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
 texture = ExtResource( 2 )
 stretch_mode = 6
 
 [node name="Amount2" type="Label" parent="VBoxContainer/CoinBox"]
-margin_left = 218.0
+margin_left = 244.0
 margin_top = 5.0
-margin_right = 249.0
+margin_right = 275.0
 margin_bottom = 35.0
 custom_colors/font_color = Color( 0.996078, 0.682353, 0.203922, 1 )
 custom_fonts/font = ExtResource( 3 )
@@ -82,13 +82,13 @@ text = " x"
 align = 1
 
 [node name="Amount" type="Label" parent="VBoxContainer/CoinBox"]
-margin_left = 253.0
+margin_left = 279.0
 margin_top = 5.0
-margin_right = 324.0
+margin_right = 299.0
 margin_bottom = 35.0
 custom_colors/font_color = Color( 0.996078, 0.682353, 0.203922, 1 )
 custom_fonts/font = ExtResource( 3 )
-text = " 123"
+text = "0"
 align = 1
 
 [node name="Button" type="HBoxContainer" parent="VBoxContainer"]

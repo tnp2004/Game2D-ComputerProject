@@ -1,0 +1,559 @@
+[gd_scene load_steps=52 format=2]
+
+[ext_resource path="res://Enemies-Sprite/newCrab1/Crab_Idle.png" type="Texture" id=1]
+[ext_resource path="res://Enemies-Sprite/Crab/Crab_AttackA_FX.png" type="Texture" id=2]
+[ext_resource path="res://Enemies-Sprite/newCrab1/Crab_Hit.png" type="Texture" id=3]
+[ext_resource path="res://Enemies-Sprite/newCrab1/Crab_Death.png" type="Texture" id=4]
+[ext_resource path="res://Enemies-Sprite/newCrab1/Crab_Run.png" type="Texture" id=5]
+[ext_resource path="res://Enemies-Sprite/newCrab1/Crab_AttackA.png" type="Texture" id=6]
+[ext_resource path="res://UI/HealthBar_monsters.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Enemies/Crab_FSM.gd" type="Script" id=8]
+[ext_resource path="res://Enemies/BlueCrab.gd" type="Script" id=9]
+
+[sub_resource type="AtlasTexture" id=103]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=104]
+atlas = ExtResource( 6 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=105]
+atlas = ExtResource( 6 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=106]
+atlas = ExtResource( 6 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=107]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=108]
+atlas = ExtResource( 6 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=109]
+atlas = ExtResource( 6 )
+region = Rect2( 128, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=110]
+atlas = ExtResource( 6 )
+region = Rect2( 192, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=111]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=112]
+atlas = ExtResource( 6 )
+region = Rect2( 64, 128, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=113]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=114]
+atlas = ExtResource( 4 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=115]
+atlas = ExtResource( 4 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=116]
+atlas = ExtResource( 4 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=117]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=118]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=119]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=120]
+atlas = ExtResource( 3 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=121]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=122]
+atlas = ExtResource( 1 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=123]
+atlas = ExtResource( 1 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=124]
+atlas = ExtResource( 1 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=125]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=126]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=127]
+atlas = ExtResource( 5 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=128]
+atlas = ExtResource( 5 )
+region = Rect2( 192, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=129]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 64, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=130]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 64, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=92]
+animations = [ {
+"frames": [ SubResource( 103 ), SubResource( 104 ), SubResource( 105 ), SubResource( 106 ), SubResource( 107 ), SubResource( 108 ), SubResource( 109 ), SubResource( 110 ), SubResource( 111 ), SubResource( 112 ) ],
+"loop": true,
+"name": "attack",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 113 ), SubResource( 114 ), SubResource( 115 ), SubResource( 116 ), SubResource( 117 ) ],
+"loop": true,
+"name": "dead",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 118 ), SubResource( 119 ), SubResource( 120 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 121 ), SubResource( 122 ), SubResource( 123 ), SubResource( 124 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ), SubResource( 129 ), SubResource( 130 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=93]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "run" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("effect:animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "effect" ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("effect:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("effect:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = false
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=94]
+resource_name = "attack"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "attack" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("effect:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "effect" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("effect:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("effect:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.1, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=95]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "dead" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("effect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AttackArea/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=96]
+resource_name = "hurt"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "hurt" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Animation" id=97]
+resource_name = "jump"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "jump" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=98]
+resource_name = "run"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "run" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="RectangleShape2D" id=99]
+extents = Vector2( 28.5, 21.5 )
+
+[sub_resource type="CircleShape2D" id=100]
+radius = 253.284
+
+[sub_resource type="RectangleShape2D" id=101]
+extents = Vector2( 40.5, 30.75 )
+
+[sub_resource type="AtlasTexture" id=89]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=90]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 64, 64 )
+
+[sub_resource type="AtlasTexture" id=91]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 0, 64, 64 )
+
+[sub_resource type="SpriteFrames" id=102]
+animations = [ {
+"frames": [ SubResource( 89 ), SubResource( 90 ), SubResource( 91 ) ],
+"loop": false,
+"name": "effect",
+"speed": 5.0
+} ]
+
+[node name="BlueCrab" type="KinematicBody2D" groups=["enemy"]]
+script = ExtResource( 9 )
+
+[node name="Crab_FSM" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 2, -4 )
+scale = Vector2( 2, 2 )
+frames = SubResource( 92 )
+animation = "run"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 93 )
+anims/attack = SubResource( 94 )
+anims/dead = SubResource( 95 )
+anims/hurt = SubResource( 96 )
+anims/jump = SubResource( 97 )
+anims/run = SubResource( 98 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.5, 6.5 )
+shape = SubResource( 99 )
+
+[node name="Detectplayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detectplayer"]
+shape = SubResource( 100 )
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2( 2.5, 7.75 )
+shape = SubResource( 101 )
+
+[node name="Grounddetecter" type="RayCast2D" parent="."]
+position = Vector2( 36, 0 )
+enabled = true
+cast_to = Vector2( 0, 40 )
+
+[node name="Walldetecter" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 50, 0 )
+
+[node name="turn_around_timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="effect" type="AnimatedSprite" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+frames = SubResource( 102 )
+animation = "effect"
+
+[node name="HealthBar" parent="." instance=ExtResource( 7 )]
+margin_left = -25.0
+margin_top = -34.0
+margin_right = -25.0
+margin_bottom = -34.0
+rect_scale = Vector2( 0.1, 0.1 )
+
+[connection signal="body_entered" from="Detectplayer" to="." method="_on_Detectplayer_body_entered"]
+[connection signal="body_exited" from="Detectplayer" to="." method="_on_Detectplayer_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_AttackArea_body_entered"]
+[connection signal="timeout" from="turn_around_timer" to="." method="_on_turn_around_timer_timeout"]
