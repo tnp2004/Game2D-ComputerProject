@@ -9,7 +9,12 @@ const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 const EXPLOSION = preload("res://Skills/Dude/Explosion.tscn") #Explosion skill
 const SPIKEBALL = preload("res://Skills/Dude/SpikeBall.tscn") #Spikeball skill
 
-export(int) var max_health = 120
+var CD_normal = false
+var CD_1 = false
+var CD_2 = false
+var CD_3 = false
+
+export(int) var max_health = 80
 var health = max_health
 var isDead = false
 export(int) var WALKSPEED = 300
@@ -136,9 +141,12 @@ func do_damage(body, damage_arr):
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
 func useNormal_Attack():
-	if Input.is_action_just_pressed("left_click"):
+	if Input.is_action_just_pressed("left_click") and !CD_normal:
 		FSM.set_state(FSM.states.skill_2)
 		normal_attack()
+		
+		CD_normal = true
+		$Normal_attackCD.start()
 		
 func normal_attack():
 	var normal_atk = ROCK_PROJECTILE.instance()
@@ -147,9 +155,11 @@ func normal_attack():
 	get_tree().current_scene.add_child(normal_atk)
 
 func useExplosion():
-	if Input.is_action_just_pressed("skill_1"):
+	if Input.is_action_just_pressed("skill_1") and !CD_1:
 		FSM.set_state(FSM.states.skill_1)
 		explosion()
+		CD_1 = true
+		$Skillcd1.start()
 		
 func explosion():
 	var explosion_skill = EXPLOSION.instance()
@@ -158,9 +168,12 @@ func explosion():
 	get_tree().current_scene.add_child(explosion_skill)
 
 func useSpikeball():
-	if Input.is_action_just_pressed("skill_2"):
+	if Input.is_action_just_pressed("skill_2") and !CD_2:
 		FSM.set_state(FSM.states.skill_2)
 		spikeball()
+		
+		CD_2 = true
+		$Skillcd2.start()
 		
 func spikeball():
 	var spikeball_skill = SPIKEBALL.instance()
@@ -169,9 +182,12 @@ func spikeball():
 	get_tree().current_scene.add_child(spikeball_skill)
 
 func use_Selfimprove():
-	if Input.is_action_just_pressed("skill_3"):
+	if Input.is_action_just_pressed("skill_3") and !CD_3:
 		FSM.set_state(FSM.states.skill_3)
 		selfimprove()
+		
+		CD_3 = true
+		$Skillcd3.start()
 
 func selfimprove():
 	$Timer.start()
@@ -198,3 +214,18 @@ func passStage():
 	$CanvasLayer/PassMenu.visible = true
 	isFinish = true
 	velocity = Vector2.ZERO
+
+
+func _on_Skillcd1_timeout():
+	CD_1 = false
+
+
+func _on_Skillcd2_timeout():
+	CD_2 = false
+
+func _on_Skillcd3_timeout():
+	CD_3 = false
+
+
+func _on_Normal_attackCD_timeout():
+	CD_normal = false

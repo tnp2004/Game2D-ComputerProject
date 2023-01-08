@@ -6,7 +6,7 @@ const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
-export(int) var max_health = 150
+export(int) var max_health = 100
 var health = max_health
 
 var isFinish = false
@@ -17,6 +17,10 @@ export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
 
 onready var FSM = get_node("Owlet_FSM")
+
+var CD_1 = false
+var CD_2 = false
+var CD_3 = false
 
 var coin = 0
 
@@ -140,9 +144,12 @@ func do_damage(body, damage_arr):
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
 func useDash_skill():
-	if Input.is_action_just_pressed("skill_1"):
+	if Input.is_action_just_pressed("skill_1") and !CD_1:
 		FSM.set_state(FSM.states.skill_1)
+		print(CD_1)
 		dash_skill()
+		CD_1 = true
+		$Skillcd1.start()
 
 func dash_skill():
 	var skill_1 = DASH_SKILL.instance()
@@ -154,9 +161,11 @@ func dash_skill():
 	get_tree().current_scene.add_child(smoke)
 
 func useWindCutter_skill():
-	if Input.is_action_just_pressed("skill_2"):
+	if Input.is_action_just_pressed("skill_2") and !CD_2:
 		FSM.set_state(FSM.states.skill_2)
 		wind_cutter_skill()
+		CD_2 = true
+		$Skillcd2.start()
 		
 func wind_cutter_skill():
 	var skill_2 = WIND_CUTTER.instance()
@@ -164,12 +173,14 @@ func wind_cutter_skill():
 	get_tree().current_scene.add_child(skill_2)
 
 func useTransform_skill():
-	if Input.is_action_just_pressed("skill_3"):
+	if Input.is_action_just_pressed("skill_3") and !CD_3:
 		FSM.set_state(FSM.states.skill_3)
 		transform_skill()
+		CD_3 = true
+		$Skillcd3.start()
 
 func transform_skill():
-	buff_damage += 15
+	buff_damage += 7
 	effect_color = transform_color
 	$AnimatedSprite.modulate = player_transform_color
 	$TransformTimer.start()
@@ -177,7 +188,7 @@ func transform_skill():
 	$TransformPlayer.play("skill_3")
 	
 func stop_transform_skill():
-	buff_damage -= 1000
+	buff_damage -= 7
 	effect_color = normal_color
 	$AnimatedSprite.modulate = normal_color
 	$TransformSprite.visible = false
@@ -203,3 +214,12 @@ func passStage():
 	$CanvasLayer/PassMenu.visible = true
 	isFinish = true
 	velocity = Vector2.ZERO
+
+func _on_Skillcd1_timeout():
+	CD_1 = false
+
+func _on_Skillcd2_timeout():
+	CD_2 = false
+
+func _on_Skillcd3_timeout():
+	CD_3 = false

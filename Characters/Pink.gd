@@ -8,12 +8,16 @@ const EARTHSPIKE = preload("res://Skills/Pink/EarthSpike.tscn") #skill 3
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
 var coin = 0
-export(int) var max_health = 100
+export(int) var max_health = 60
 var health = max_health
 var isDead = false
 export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
+
+var CD_1 = false
+var CD_2 = false
+var CD_3 = false
 
 onready var FSM = get_node("Pink_FSM")
 
@@ -141,11 +145,14 @@ func do_damage(body, damage_arr):
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)
 
 func useWaterball():
-	if Input.is_action_just_pressed("skill_1"):
+	if Input.is_action_just_pressed("skill_1") and !CD_1:
 		FSM.set_state(FSM.states.skill_1)
 		WaterBall()
 		$WaterballTimer2.start()
 		$WaterballTimer3.start()
+		
+		CD_1 = true
+		$Skillcd1.start()
 
 func WaterBall():
 	var skill_1_phate_1 = WATERBALL.instance()
@@ -153,9 +160,12 @@ func WaterBall():
 	get_tree().current_scene.add_child(skill_1_phate_1)
 	
 func useTornado_skill():
-	if Input.is_action_just_pressed("skill_2"):
+	if Input.is_action_just_pressed("skill_2") and !CD_2:
 		FSM.set_state(FSM.states.skill_2)
 		tornado_skill()
+		
+		CD_2 = true
+		$Skillcd2.start()
 		
 func tornado_skill():
 	var skill_2 = TORNADO.instance()
@@ -163,9 +173,11 @@ func tornado_skill():
 	get_tree().current_scene.add_child(skill_2)
 
 func useEarthspike_skill():
-	if Input.is_action_just_pressed("skill_3") and $canEarthspike.is_colliding() and $canEarthspike.get_collider().is_in_group("floor"):
+	if Input.is_action_just_pressed("skill_3") and $canEarthspike.is_colliding() and $canEarthspike.get_collider().is_in_group("floor") and !CD_3:
 		FSM.set_state(FSM.states.skill_3)
 		earthspike_skill()
+		CD_3 = true
+		$Skillcd3.start()
 		
 func earthspike_skill():
 	var skill_3 = EARTHSPIKE.instance()
@@ -203,3 +215,15 @@ func passStage():
 	$CanvasLayer/PassMenu.visible = true
 	isFinish = true
 	velocity = Vector2.ZERO
+
+
+func _on_Skillcd1_timeout():
+	CD_1 = false
+
+
+func _on_Skillcd2_timeout():
+	CD_2 = false
+
+
+func _on_Skillcd3_timeout():
+	CD_3 = false

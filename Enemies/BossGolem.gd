@@ -5,7 +5,7 @@ onready var FSM = get_node("Golem_FSM")
 
 const LASERBEAM = preload("res://Enemies/Laserbeam.tscn")
 
-export(int) var max_health = 60
+export(int) var max_health = 300
 var health = max_health
 var isDead = false
 

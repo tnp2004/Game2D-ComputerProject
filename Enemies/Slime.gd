@@ -3,7 +3,7 @@ extends KinematicBody2D
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 onready var FSM = get_node("Slime_FSM")
 
-export(int) var max_health = 10
+export(int) var max_health = 20
 var health = max_health
 var isDead = false
 

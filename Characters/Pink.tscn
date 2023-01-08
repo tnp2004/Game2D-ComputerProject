@@ -769,6 +769,18 @@ shape = SubResource( 187 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 
+[node name="Skillcd1" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="Skillcd2" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+
+[node name="Skillcd3" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
 [connection signal="timeout" from="WaterballTimer2" to="." method="_on_WaterballTimer_timeout"]
@@ -776,3 +788,6 @@ shape = SubResource( 187 )
 [connection signal="timeout" from="attackCD" to="." method="_on_attackCD_timeout"]
 [connection signal="area_entered" from="ItemCollecter" to="." method="_on_ItemCollecter_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="Skillcd1" to="." method="_on_Skillcd1_timeout"]
+[connection signal="timeout" from="Skillcd2" to="." method="_on_Skillcd2_timeout"]
+[connection signal="timeout" from="Skillcd3" to="." method="_on_Skillcd3_timeout"]

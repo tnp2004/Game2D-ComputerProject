@@ -4,7 +4,7 @@ const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 
 onready var FSM = get_node("Golem_FSM")
 
-export(int) var max_health = 25
+export(int) var max_health = 60
 var health = max_health
 var isDead = false
 
