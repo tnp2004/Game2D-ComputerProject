@@ -722,6 +722,10 @@ one_shot = true
 wait_time = 15.0
 one_shot = true
 
+[node name="health_potion_cd" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="ItemCollecter" to="." method="_on_ItemCollecter_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
@@ -729,3 +733,4 @@ one_shot = true
 [connection signal="timeout" from="Skillcd1" to="." method="_on_Skillcd1_timeout"]
 [connection signal="timeout" from="Skillcd2" to="." method="_on_Skillcd2_timeout"]
 [connection signal="timeout" from="Skillcd3" to="." method="_on_Skillcd3_timeout"]
+[connection signal="timeout" from="health_potion_cd" to="." method="_on_health_potion_cd_timeout"]

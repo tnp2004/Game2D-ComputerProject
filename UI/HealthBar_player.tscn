@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://UI/HealthBar_player.gd" type="Script" id=1]
 [ext_resource path="res://UI-Sprite/border_health.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://charactersIcon/Owlet.png" type="Texture" id=4]
 [ext_resource path="res://UI-Sprite/coin2.png" type="Texture" id=5]
 [ext_resource path="res://Fonts/fontsetting.tres" type="DynamicFont" id=6]
+[ext_resource path="res://UI-Sprite/potions/item_26.png" type="Texture" id=7]
 
 [sub_resource type="Theme" id=4]
 
@@ -131,6 +132,14 @@ custom_colors/font_color = Color( 0.996078, 0.682353, 0.203922, 1 )
 custom_fonts/font = SubResource( 10 )
 text = "0"
 
+[node name="health_potion_amount" type="Label" parent="."]
+margin_left = 727.333
+margin_top = 22.0
+margin_right = 755.333
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 10 )
+text = "0"
+
 [node name="Name" type="Label" parent="."]
 margin_left = 61.3333
 margin_top = 22.0
@@ -139,3 +148,15 @@ margin_bottom = 52.0
 rect_scale = Vector2( 0.7, 0.7 )
 custom_fonts/font = ExtResource( 6 )
 text = "Player Name"
+
+[node name="health_potion" type="TextureRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 51.9999
+margin_top = -343.333
+margin_right = 67.9999
+margin_bottom = -327.333
+rect_scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 7 )

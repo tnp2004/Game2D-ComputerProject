@@ -781,6 +781,10 @@ one_shot = true
 wait_time = 5.0
 one_shot = true
 
+[node name="health_potion_cd" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [connection signal="body_entered" from="attackArea" to="." method="_on_attackArea_body_entered"]
 [connection signal="timeout" from="TransformTimer" to="." method="_on_TransformTimer_timeout"]
 [connection signal="timeout" from="WaterballTimer2" to="." method="_on_WaterballTimer_timeout"]
@@ -791,3 +795,4 @@ one_shot = true
 [connection signal="timeout" from="Skillcd1" to="." method="_on_Skillcd1_timeout"]
 [connection signal="timeout" from="Skillcd2" to="." method="_on_Skillcd2_timeout"]
 [connection signal="timeout" from="Skillcd3" to="." method="_on_Skillcd3_timeout"]
+[connection signal="timeout" from="health_potion_cd" to="." method="_on_health_potion_cd_timeout"]

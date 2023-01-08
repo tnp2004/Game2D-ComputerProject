@@ -56,7 +56,6 @@ script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 10 )
-frame = 8
 playing = true
 
 [node name="CoinArea" type="Area2D" parent="." groups=["coin"]]

@@ -18,6 +18,7 @@ func _ready():
 
 func _state_logic(_delta: float) -> void:
 	if !parent.isDead:
+		parent.drink_health_potion()
 		parent.get_input_direction()
 		parent.useSpikeball()
 		parent.use_Selfimprove()

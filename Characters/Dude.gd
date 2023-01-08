@@ -9,6 +9,7 @@ const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 const EXPLOSION = preload("res://Skills/Dude/Explosion.tscn") #Explosion skill
 const SPIKEBALL = preload("res://Skills/Dude/SpikeBall.tscn") #Spikeball skill
 
+var CD_health_potion = false
 var CD_normal = false
 var CD_1 = false
 var CD_2 = false
@@ -38,6 +39,18 @@ var buff_damage = 0
 var walk_dir
 var normal_range = 5
 var improve_skill = 0
+
+func drink_health_potion():
+	if Input.is_action_just_pressed("health_potion") and Global.Health_potion_amount != 0 and !CD_health_potion:
+		CD_health_potion = true
+		$health_potion_cd.start()
+		if max_health - 20 >= health:
+			health += 20
+		elif health + 20 >= max_health:
+			health += max_health - health
+		$CanvasLayer/HealthBar_player._on_health_updated(health)
+		$CanvasLayer/HealthBar_player._on_potion_amount_updated()
+		Global.Health_potion_amount -= 1
 
 func get_input_direction():
 	if !isFinish:
@@ -214,6 +227,8 @@ func passStage():
 	$CanvasLayer/PassMenu.visible = true
 	isFinish = true
 	velocity = Vector2.ZERO
+	
+	Global.money += coin
 
 
 func _on_Skillcd1_timeout():
@@ -229,3 +244,7 @@ func _on_Skillcd3_timeout():
 
 func _on_Normal_attackCD_timeout():
 	CD_normal = false
+
+
+func _on_health_potion_cd_timeout():
+	CD_health_potion = false

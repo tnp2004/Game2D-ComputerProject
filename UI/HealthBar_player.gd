@@ -17,6 +17,9 @@ func _process(delta):
 	$Name.text = str(Global.player_name)
 	set_process(false)
 
+func _physics_process(delta):
+	$health_potion_amount.text = str(Global.Health_potion_amount)
+
 func set_up_icon_char():
 	if get_player_node():
 		var character = get_player_node().name
@@ -28,6 +31,9 @@ func _on_health_updated(health):
 	$ProgressBar2.value = health
 	current_health = health
 	$ProgressBar/Label.text = str(current_health) + "/" + str(max_health)
+	
+func _on_potion_amount_updated():
+	$health_potion_amount.text = str(Global.Health_potion_amount)
 
 func get_player_node():
 	for i in get_tree().current_scene.get_children():

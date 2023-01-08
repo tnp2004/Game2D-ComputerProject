@@ -15,6 +15,7 @@ export(int) var WALKSPEED = 300
 export(int) var JUMPFORCE = 500
 export(int) var GRAVITY = 1400
 
+var CD_health_potion = false
 var CD_1 = false
 var CD_2 = false
 var CD_3 = false
@@ -34,6 +35,18 @@ var earth_spike_pos = 29
 var attack_cooldown = false
 
 var isFinish = false
+
+func drink_health_potion():
+	if Input.is_action_just_pressed("health_potion") and Global.Health_potion_amount != 0 and !CD_health_potion:
+		CD_health_potion = true
+		$health_potion_cd.start()
+		if max_health - 20 >= health:
+			health += 20
+		elif health + 20 >= max_health:
+			health += max_health - health
+		$CanvasLayer/HealthBar_player._on_health_updated(health)
+		$CanvasLayer/HealthBar_player._on_potion_amount_updated()
+		Global.Health_potion_amount -= 1
 
 func get_input_direction():
 	if !isFinish:
@@ -215,6 +228,8 @@ func passStage():
 	$CanvasLayer/PassMenu.visible = true
 	isFinish = true
 	velocity = Vector2.ZERO
+	
+	Global.money += coin
 
 
 func _on_Skillcd1_timeout():
@@ -227,3 +242,6 @@ func _on_Skillcd2_timeout():
 
 func _on_Skillcd3_timeout():
 	CD_3 = false
+
+func _on_health_potion_cd_timeout():
+	CD_health_potion = false
