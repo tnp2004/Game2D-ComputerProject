@@ -6,7 +6,7 @@ const DASH_SMOKE = preload("res://Skills/Owlet/DashSmoke.tscn") #skill 1
 const WIND_CUTTER = preload("res://Skills/Owlet/WindCutter.tscn") #skill 2
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
-export(int) var max_health = 1000
+export(int) var max_health = 150
 var health = max_health
 
 var isFinish = false
@@ -134,7 +134,7 @@ func most_of_arr(arr):
 			most_number = i
 	return most_number
 
-var normal_attack = [2, 3, 4, 5]
+var normal_attack = [5, 6, 7, 8]
 func do_damage(body, damage_arr):
 	body.knockback($AnimatedSprite.flip_h)
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)

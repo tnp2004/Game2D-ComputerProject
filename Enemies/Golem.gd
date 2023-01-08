@@ -4,16 +4,16 @@ const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 
 onready var FSM = get_node("Golem_FSM")
 
-export(int) var max_health = 200
+export(int) var max_health = 25
 var health = max_health
 var isDead = false
 
-export(int) var SPEED = 100
+export(int) var SPEED = 90
 var JUMPFORCE = 100
 const FRICTION = 0.5
 const GRAVITY = 1000
 var velocity = Vector2.ZERO
-var attack_damage = [2, 3, 4]
+var attack_damage = [9, 10, 11]
 
 var knockback_force = 5000
 var knockup_force = - 200

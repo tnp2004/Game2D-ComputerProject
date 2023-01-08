@@ -1,6 +1,6 @@
 extends Node2D
 
-var damage_dash_skill = [4, 5, 6]
+var damage_dash_skill = [3, 4, 5]
 
 func effect(player_position, isFlip, color):
 	$AnimatedSprite.flip_h = isFlip

@@ -8,7 +8,7 @@ const EARTHSPIKE = preload("res://Skills/Pink/EarthSpike.tscn") #skill 3
 const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 
 var coin = 0
-export(int) var max_health = 10
+export(int) var max_health = 100
 var health = max_health
 var isDead = false
 export(int) var WALKSPEED = 300

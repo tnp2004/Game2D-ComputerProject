@@ -1,6 +1,6 @@
 extends Node2D
 
-var damage_wind_cutter_skill = [5, 6, 7]
+var damage_wind_cutter_skill = [2, 3, 4]
 
 var velocity = Vector2.ZERO
 var SPEED = 200

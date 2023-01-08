@@ -1,6 +1,6 @@
 extends Node2D
 
-var damage_normal_attack = [3, 4, 5]
+var damage_normal_attack = [5, 6, 7]
 
 var velocity = Vector2.ZERO
 var SPEED = 500

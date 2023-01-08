@@ -13,6 +13,7 @@ func _on_Info_pressed():
 
 
 func _on_Help_pressed():
+# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://UI/HelpMenu.tscn")
 
 

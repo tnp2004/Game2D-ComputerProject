@@ -1,6 +1,6 @@
 extends Node2D
 
-var damage_water_ball_skill = [3, 4, 5]
+var damage_water_ball_skill = [4, 5, 6]
 
 var velocity = Vector2.ZERO
 var SPEED = 300

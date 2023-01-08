@@ -9,7 +9,7 @@ const SCREEN_SHAKER = preload("res://UI/ScreenShake.tscn")
 const EXPLOSION = preload("res://Skills/Dude/Explosion.tscn") #Explosion skill
 const SPIKEBALL = preload("res://Skills/Dude/SpikeBall.tscn") #Spikeball skill
 
-export(int) var max_health = 10
+export(int) var max_health = 120
 var health = max_health
 var isDead = false
 export(int) var WALKSPEED = 300
@@ -130,7 +130,7 @@ func most_of_arr(arr):
 			most_number = i
 	return most_number
 
-var normal_attack_damage = [2, 3, 4, 5]
+var normal_attack_damage = [7, 8, 9]
 func do_damage(body, damage_arr):
 	body.knockback($AnimatedSprite.flip_h)
 	body.spawn_damageIndicator_enemy(random_thing_in_array(damage_arr), most_of_arr(damage_arr), buff_damage)

@@ -3,16 +3,16 @@ extends KinematicBody2D
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
 onready var FSM = get_node("Bat_FSM")
 
-export(int) var max_health = 200
+export(int) var max_health = 20
 var health = max_health
 var isDead = false
 
-export(int) var SPEED = 100
+export(int) var SPEED = 150
 var JUMPFORCE = 100
 const FRICTION = 0.5
 const GRAVITY = 1000
 var velocity = Vector2.ZERO
-var attack_damage = [2, 3, 4]
+var attack_damage = [5, 5, 6]
 
 var knockback_force = 5000
 var knockup_force = 0

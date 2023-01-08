@@ -34,4 +34,4 @@ func _on_SkillArea_body_entered(body):
 	$AnimationPlayer.play("collide")
 	isStop = true
 	if body.is_in_group("player"):
-		body.decrease_health(1, $AnimatedSprite.flip_h)
+		body.decrease_health(2, $AnimatedSprite.flip_h)

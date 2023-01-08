@@ -5,7 +5,7 @@ onready var FSM = get_node("Golem_FSM")
 
 const LASERBEAM = preload("res://Enemies/Laserbeam.tscn")
 
-export(int) var max_health = 200
+export(int) var max_health = 60
 var health = max_health
 var isDead = false
 
@@ -14,7 +14,7 @@ var JUMPFORCE = 100
 const FRICTION = 0.5
 const GRAVITY = 1000
 var velocity = Vector2.ZERO
-var attack_damage = [2, 3, 4]
+var attack_damage = [10, 11, 12]
 
 var knockback_force = 5000
 var knockup_force = - 200
