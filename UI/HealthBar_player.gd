@@ -15,6 +15,7 @@ func _ready():
 
 func _process(delta):
 	$Name.text = str(Global.player_name)
+	set_process(false)
 
 func set_up_icon_char():
 	if get_player_node():

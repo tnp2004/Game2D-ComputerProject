@@ -350,6 +350,7 @@ margin_left = 106.0
 margin_right = 356.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 250, 0 )
+text = "player1"
 max_length = 20
 placeholder_text = "enter your name"
 

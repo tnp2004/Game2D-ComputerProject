@@ -12,6 +12,6 @@ func _on_RestartButton_pressed():
 	var thisStage =  get_tree().current_scene.name
 	get_tree().change_scene("res://Stages/" + thisStage + ".tscn")
 
-
 func _on_MenuButton_pressed():
+	get_tree().paused = false
 	get_tree().change_scene("res://UI/Mainmenu.tscn")

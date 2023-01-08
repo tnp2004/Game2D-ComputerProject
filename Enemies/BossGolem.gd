@@ -1,8 +1,9 @@
 extends KinematicBody2D
 
 const INDICATOR_DAMAGE = preload("res://UI/DamageIndicator.tscn")
-
 onready var FSM = get_node("Golem_FSM")
+
+const LASERBEAM = preload("res://Enemies/Laserbeam.tscn")
 
 export(int) var max_health = 200
 var health = max_health
@@ -71,6 +72,11 @@ func random_thing_in_array(arr):
 	var randomResult = randi()%len(arr)
 	return arr[randomResult]
 
+func fire_laser_beam():
+	var laserbeam = LASERBEAM.instance()
+	laserbeam.normal_attack(position, $AnimatedSprite.flip_h)
+	get_tree().current_scene.call_deferred("add_child", laserbeam)
+
 func attacking(body):
 	FSM.set_state(FSM.states.attack)
 	body.decrease_health(random_thing_in_array(attack_damage), $AnimatedSprite.flip_h)
@@ -85,10 +91,13 @@ func isFlip():
 		$AnimatedSprite.flip_h = true
 		$Grounddetecter.position.x = - 36
 		$Walldetecter.cast_to.x = - 50
+		$LaserbeamAttack/CollisionShape2D.position.x = -123.5
 	elif velocity.x > 0:
 		$AnimatedSprite.flip_h = false
 		$Grounddetecter.position.x = 36
 		$Walldetecter.cast_to.x = 50
+		$LaserbeamAttack/CollisionShape2D.position.x = 123.5
+		
 	$effect.flip_h = $AnimatedSprite.flip_h
 
 func chase_player():
@@ -126,3 +135,8 @@ func _on_turn_around_timer_timeout():
 func _on_AttackRange_body_entered(body):
 	if self.velocity.x <= 0:
 		FSM.set_state(FSM.states.attack)
+
+func _on_LaserbeamAttack_body_entered(body):
+	if body.is_in_group("player"):
+		FSM.set_state(FSM.states.attack)
+		fire_laser_beam()
